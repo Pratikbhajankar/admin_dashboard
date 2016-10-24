@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register Page</title>
+
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div id = 'spregform' class='regform col-md-12 col-sm-12 col-xs-12' align="center" data-ng-hide="isUserRegister">
+				<form name="registrationForm" data-ng-submit="register()" method="post" class="col-md-10 col-sm-10 col-xs-10">
+					<input type="hidden" name="deviceType" value="2" data-ng-model="user.deviceType">
+					<table class="col-md-12 col-sm-12 col-xs-12 regstrationClass">
+						<tr>
+							<td>
+								First Name :
+							</td>
+							<td>
+								<input type="text" name="userFname" class="form-control" data-ng-model="user.userFname" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Last Name :
+							</td>
+							<td>
+								<input type="text" name="userLName" class="form-control"  data-ng-model="user.userLName" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Email :
+							</td>
+							<td>
+								<div style="float: left;    width: 60%;" >
+									<input type="email" name="emailId" class="form-control" data-ng-model="user.emailId" required="required">
+								</div>
+								
+								<div class="form-error"  style="float: left;padding: 1%;" data-ng-show="error.emailError !=''">
+		                             <!-- <span data-ng-show="registrationForm.confPassword.$error.required">Confirm Password is </span> -->
+		                             <span>
+		                             	<i class="fa fa-times" style="color: red;"></i> {{error.emailError}}                          
+		                             </span>
+		                              <!-- <span data-ng-show="! registrationForm.confPassword.$error.required && password !='' && user.confPassword ==user.password">
+		                             	<i class="fa fa-check" style="color: green;"></i>	                             
+		                             </span> -->
+		                         </div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Password :
+							</td>
+							<td>
+								<input type="password" name="password" class="form-control" data-ng-model="user.password" required="required">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Confirm Password :
+							</td>
+							<td>
+								 <div style="float: left;    width: 60%;" >
+								 	<input type="password" name="confPassword" class="form-control" 
+								 	data-ng-model="user.confPassword" required="required">
+								 </div>
+								 
+								
+								 <div class="form-error"  style="float: left;padding: 1%;"
+								 data-ng-show="registrationForm.$submitted || 
+								 registrationForm.confPassword.$touched || 
+								 (registrationForm.password !='' && registrationForm.confPassword.$touched )">
+		                             <!-- <span data-ng-show="registrationForm.confPassword.$error.required">Confirm Password is </span> -->
+		                             <span data-ng-show="! registrationForm.confPassword.$error.required && password !='' && user.confPassword !=user.password">
+		                             	<i class="fa fa-times" style="color: red;"></i>                           
+		                             </span>
+		                              <span data-ng-show="! registrationForm.confPassword.$error.required && password !='' && user.confPassword ==user.password">
+		                             	<i class="fa fa-check" style="color: green;"></i>	                             
+		                             </span>
+		                         </div>
+							</td>
+						</tr>
+						
+						
+						
+						<tr>
+							<td colspan="2" align="center">
+								<button type="submit" class="btn btn-success">Register</button>
+							</td>
+						</tr>
+					</table>
+					
+				</form>
+			</div>
+			<div class=""></div>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

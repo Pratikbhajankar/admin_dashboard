@@ -1,0 +1,293 @@
+ <div id="sessionMoreDetailsModal">
+ 
+ 
+ <div class="modal-header">
+ 			<button type="button" class="close" data-dismiss="modal" data-ng-click="parentscope.showmapViewClick =false;parentscope.tabClick('mannageSession');parentscope.closeModel()">&times;</button>
+            <h4 class="modal-title">{{parentscope.floorPlanSessionData.eventSessioName}}
+            
+            </h4>
+ </div>
+ <div class="modal-body">
+  
+    <div style="clear: both;height: 20px;"></div>
+       	<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="parentscope.showSessionData">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!parentscope.showMulitdatePicker">
+					<table class="table">
+						<tr>
+							<td>Session Name:</td>
+							<td>
+								
+								<input type="text" data-ng-model="parentscope.floorPlanSessionData.eventSessioName" 
+								 
+								 class="form-control" placeholder="Enter Session Name">
+							</td>
+							<td>Event Date :</td>
+							<td>
+								<input type="text" data-ng-model="parentscope.floorPlanSessionData.eventSessionDate"
+					 			class="form-control" jqdatepickereventdate 
+					 			readonly="readonly" placeholder="Select Date">
+							</td>
+						</tr>
+						<tr>
+							<td>Start Time </td>
+							<td>
+								<input type="text" data-ng-model="parentscope.floorPlanSessionData.eventSessionStartTime"
+								 readonly="readonly" 
+								 jqdatepicker55
+								 
+								 class="form-control" placeholder="Enter Session Start Time">
+							</td>
+							<td>End Time</td>
+							<td>
+								<input type="text" data-ng-model="parentscope.floorPlanSessionData.eventsessionEndTime" 
+								 jqdatepicker55 readonly="readonly"
+								 class="form-control" placeholder="Enter Session End Time">
+							</td>
+							
+						</tr>
+						<tr>
+							<td>Select Templates</td>
+							<td>
+								{{parentscope.floorPlanSessionData.sessionTemeplates.serviceMapName}}
+							</td>
+							<td>Booking Start From</td>
+							<td>
+							
+								<select data-ng-model="parentscope.floorPlanSessionData.eventBookingStartTime" class="form-control"
+									data-ng-include="'templates/view/subTemplates/timeDropDown.html'"
+								>
+									
+								</select>
+							</td>
+						</tr>	
+						<tr>
+						<td>Description: </td>
+						<td colspan="3">
+							<textarea rows="5" cols="40" style="resize: vertical;"
+							placeholder="Enter Discription" 
+							data-ng-model="parentscope.floorPlanSessionData.eventSessionDescription" class="form-control">
+							</textarea>
+						</td>
+					</tr>
+					</table>
+					<hr>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" >
+					 
+					<div class="col-md-3 col-sm-3 col-xs-3">
+						<button class="btn btn-primary" data-ng-click="parentscope.showMulitdatePicker=true" data-ng-show="!parentscope.showMulitdatePicker">Make it recursive</button>
+						<button class="btn btn-warning" data-ng-click="parentscope.showMulitdatePicker=false" data-ng-show="parentscope.showMulitdatePicker">Cancel</button>
+						
+					</div>
+					
+					<div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="parentscope.showMulitdatePicker">
+						<h5>Select dates for recursion</h5>
+							 <div class='btn-group'>
+						         <button class='btn btn-primary' ng-model='type' uib-btn-radio='"individual"'>Individual</button>
+						         <button class='btn btn-primary' ng-model='type' uib-btn-radio='"range"'>Range</button>
+					         </div>
+							<uib-datepicker ng-model='datesForRecurtion' 
+							  multi-select='parentscope.floorPlanSessionData.selectedDates' 
+							  show-weeks="false"
+							  select-range='{{type=="range"}}'
+							  ></uib-datepicker>
+					 
+								<!-- <span data-ng-repeat ="datesepoche in  parentscope.floorPlanSessionData.selectedDates" >
+									
+									{{datesepoche | date:'dd/MM/yyyy'}}
+									{{datesepoche}}
+								</span>		 -->				
+					</div>
+					
+					
+				</div>
+				<br><br>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="col-md-6 col-sm-6 col-xs-6" >
+				
+						<label>Templates Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+						<input type="text" data-ng-model="parentscope.floorPlanDataTemples.serviceMapName"><br>
+						<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type="number" 
+						data-ng-model="parentscope.floorPlanDataTemples.numOfRow"><br>
+						<label>Enter Num Of Column&nbsp;&nbsp;:</label><input type="number" 
+						data-ng-model="parentscope.floorPlanDataTemples.numOfCol">
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<input type="text" class="form-control" placeholder="Add category" 
+						style="width: 200px;" data-ng-model="parentscope.catergoryValue" >
+						
+						<br>
+						<button class="btn btn-primary" data-ng-click="parentscope.addCategory()">Add catergories</button>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<br>
+						<button class="btn btn-info" data-ng-click="parentscope.creatView()">Reset view</button>
+						<br><br>
+						<button class="btn btn-success"
+						 	data-ng-click="parentscope.saveFloorPlanSessionData();">Save </button>
+						 &nbsp;&nbsp;&nbsp;
+						<!-- <button class="btn btn-warning" data-ng-click="tabClick()">Back </button> -->
+						<!-- <br><br>
+						<button class="btn btn-primary" data-ng-click="showCanvas()">show Canavas</button> -->
+						<button class="btn btn-primary" data-ng-click="parentscope.showmapViewClick = true" data-ng-show="!parentscope.showmapViewClick">Show Maps</button>
+						<button class="btn btn-primary" data-ng-click="parentscope.showmapViewClick = false" data-ng-show="parentscope.showmapViewClick">Hide Maps</button>
+					</div>	
+					<div class="col-md-6 col-sm-6 col-xs-6">
+						<br>
+						
+						<!--  {{parentscope.floorPlanDataTemples.seatCateories}} -->
+						 		<!-- {{toShow?seatCateory:''}} -->
+						 		<table class="table">
+						 		
+						 			<tr data-ng-repeat="seatCateory in 
+						 		parentscope.floorPlanDataTemples.seatCateories" >
+						 				<td>
+						 					<span  data-ng-show="toShow">{{seatCateory.category.categoryName}}</span>
+						 				
+						 					<input type="text" data-ng-model="seatCateory.category.categoryName" data-ng-show="!toShow">
+						 				</td>
+						 				<td>
+						 					<span data-ng-show="toShow">{{seatCateory.category.categoryPrice}}</span>
+						 					<input type="text" data-ng-model="seatCateory.category.categoryPrice" data-ng-show="!toShow">
+						 				</td>
+						 				<td>
+						 					<div class="pull-right" data-ng-init="toShow=true">
+									 			<i class="fa fa-edit" title="Edit Category" data-ng-show="toShow"
+									 			 data-ng-click="toShow=!toShow;"></i>
+									 			<i class="fa fa-trash" title="Delete Category" 
+									 			data-ng-show="toShow" 
+									 				data-ng-click="parentscope.deleteCategory($index);refreshView()">
+									 			</i>
+									 			<i class="fa fa-floppy-o" title="Done" data-ng-show="!toShow" 
+									 			data-ng-click="toShow=!toShow;floorPlanDataTemples.seatCateories[$index]=seatCateory"></i>
+									 		</div>
+						 				</td>
+						 			</tr>
+							</table>
+					</div>
+				</div>
+				
+				
+												
+				
+				
+				
+				 
+			<hr>
+			</div>
+											
+			<div class="col-md-12 col-sm-12 col-xs-12"  data-ng-show="parentscope.showmapViewClick">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					
+					<table class="table table-bordered" id="layoutcontainerTable" style="width: auto;"
+					data-ng-init="seatCateoriesList =parentscope.floorPlanDataTemples.seatCateories"
+					>
+						<tr>
+							<th></th>
+							<th data-ng-repeat="seatcol in parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns" 
+							
+							align="center" style="height: 20px;width: 40px;">
+								
+								 <i class="fa fa-plus" title="Add"
+								data-ng-if="($index != 0 && $index != parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+								data-ng-click="parentscope.addExtraRowAfterFirstRow()"
+								></i>
+								<i class="fa fa-bookmark" title="Remove Column" 
+									data-ng-if="($index !=0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+									data-ng-click="parentscope.removeColumn($index,seatcol,true)"
+									data-ng-hide="seatcol.columnRemoved"
+								></i>
+								<i class="fa fa-bookmark greayclor" title="Add Column"
+								  data-ng-click="parentscope.removeColumn($index,seatcol,false)"
+								  data-ng-Show="seatcol.columnRemoved &&($index != 0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+								></i>
+							</th>
+						</tr>
+						<tr data-ng-repeat="seatRow in parentscope.floorPlanDataTemples.seaTPlanData.seatRows">
+							
+							<td> 
+								<!-- {{seatCateoriesList}} -->
+							
+								<select style="width: 80px;" class="form-control" 
+								data-ng-init="seatCateoryselect = seatRow.seatColumns[1].columnSeatCateory" 
+								 data-ng-model="seatCateoryselect"
+								 data-ng-change="parentscope.categoryChange(seatRow,seatCateoryselect)" title="{{seatCateoryselect}}">
+									<option value="" selected="selected">--select--</option>
+									<option value="{{seatCateory2.category.categoryName}}" 
+									data-ng-repeat="seatCateory2 in seatCateoriesList">
+									{{seatCateory2.category.categoryName}}
+									</option>
+								</select>
+							</td>
+							<td data-ng-repeat="seatcol in seatRow.seatColumns" align="center" 
+								data-ng-mouseover="seatcol.showAddButton = true" 
+								style="height: 20px;width: 60px;"
+								
+								data-ng-mouseleave="seatcol.showAddButton =!seatcol.showAddButton" data-ng-init="seatcol.showAddButton = !true">
+								<!-- {{seatcol.showAddButton}} -->
+								<span data-ng-hide="seatcol.columnShow || $index == seatRow.seatColumns.length-1">
+									{{seatcol.columnStatusLable}}
+								</span>
+								<i class="fa fa-times" data-ng-hide="seatcol.columnRemoved"
+								 title="Remove seat" style="font-size: 10px;"
+								 data-ng-click="parentscope.removeCell(seatcol,true)"></i>
+								<i class="fa fa-plus" title="Add seat" 
+								  data-ng-click="parentscope.removeCell(seatcol,false)" data-ng-show="seatcol.columnRemoved  && seatcol.columnShow && seatcol.showAddButton"
+								  style="font-size: 12px;"></i>
+								  <!-- {{seatcol.columnShow}}
+								    {{seatcol.columnRemoved}} -->
+								<i class="fa fa-square" data-ng-hide="seatcol.columnRemoved"></i>
+								<i class="fa fa-plus" title="Add Seat" data-ng-hide="seatcol.columnShow" 
+								data-ng-click="parentscope.addExtraCell(seatRow,{{$index}})"></i>
+								<i class="fa fa-bookmark" style="color: black;" data-ng-class="{blackColor:!flagtosend,greayclor:flagtosend}" 
+								title="{{!flagtosend?'Remove Row':'Add Row'}}" data-ng-hide="seatcol.columnShow  || $index == 0" 
+								data-ng-init="flagtosend = false"
+								 data-ng-click="parentscope.removeRow(seatRow.seatColumns,!flagtosend);flagtosend =!flagtosend"></i>
+				
+								<i class="fa fa-trash" title="Delete Row" data-ng-hide="seatcol.columnShow"
+								 data-ng-click="parentscope.deleteRow(seatRow)"></i>
+				
+							</td>
+						</tr>
+						<tr>
+							<th></th>
+							<th data-ng-repeat="seatcol in parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns" 
+							style="height: 20px;width: 40px;" align="center">
+								<i class="fa fa-plus" title="Add"
+								data-ng-if="($index != 0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+								data-ng-click="parentscope.addExtraRow()"
+								></i>
+								
+								<i class="fa fa-bookmark" title="Remove Column" 
+									data-ng-if="($index !=0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+									data-ng-click="parentscope.removeColumn($index,seatcol,true)"
+									data-ng-hide="seatcol.columnRemoved"
+								></i>
+								
+								<i class="fa fa-bookmark greayclor" title="Add Column"
+								  data-ng-click="parentscope.removeColumn($index,seatcol,false)"
+								  data-ng-Show="seatcol.columnRemoved &&($index != 0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+								></i>
+								<i class="fa fa-trash" title="delete all Column" 
+								data-ng-if="($index != 0 && $index !=parentscope.floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+								data-ng-click="parentscope.delteAllColumn($index,seatcol,true)"
+								></i>
+								
+							</th>
+						</tr>
+					</table>
+				</div>
+				
+			</div>
+											
+		</div>
+<div style="clear: both;height: 20px;"></div>
+ 
+ <div class="modal-footer">
+ 	<button type="button" class="btn btn-success" data-ng-click="parentscope.saveFloorPlanSessionData();">Save</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="parentscope.showmapViewClick =false;parentscope.tabClick('mannageSession');parentscope.closeModel()">Close</button>
+ </div>
+ </div>

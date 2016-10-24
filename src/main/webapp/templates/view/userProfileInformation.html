@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User Information</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<form name="moreInformation" data-ng-submit="addInformationForm()" method="get">
+					<table class="col-md-8 col-sm-8 col-xs-8 regstrationClass" >
+						<tr>
+							<td>Business Type :</td>
+							<td>
+								<!-- <select name="busstype" id="bussType" data-ng-model="userInformation.bussType" 
+								class="form-control" data-ng-change="bussinessSelectChange(userInformation.bussType)" required="required">
+									<option value="" selected="selected">--select--</option>
+									<option value="1">DOCTOR</option>
+	     							<option value="2">GYM</option>
+	     							<option value="3">SCHOOL</option>
+								</select> -->
+								<select name="busstype" id="bussType" data-ng-model="userInformation.bussType" 
+									class="form-control" data-ng-change="bussinessSelectChange(userInformation.bussType)" required="required">
+									<option value="" selected="selected">--select--</option>
+								    <option data-ng-repeat="bussiness in bussineses" value="{{bussiness.bussinessTypeId}}">{{bussiness.bussinessType}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>{{orgName}}:</td>
+							<td>
+								<input type="text" name="clinicName" class="form-control" 
+								data-ng-model="userInformation.orgName" required="required" 
+								placeholder="Enter {{orgName}}">
+							</td>
+						</tr>
+						<tr data-ng-show="userInformation.bussType == 4">
+							<td>Specializations :</td>
+							<td>
+								<select class="form-control" id="practice_specialty"
+								 name=speciality 
+								 data-ng-model="userInformation.speciality">
+								<option  data-ng-repeat="constrnBuss in constrnBussType" value="{{constrnBuss.bussinessName}}">{{constrnBuss.bussinessName}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr data-ng-show="isDoctorSelect">
+							<td>Business :</td>
+							<td>
+								<select class="form-control" id="practice_specialty"
+								 name=speciality 
+								 data-ng-model="userInformation.speciality">
+									<option value="" selected="selected">--select--</option>
+									<option value="Acupuncture">Acupuncture</option>
+									<option value="Allergist/Immunologist">Allergy / Immunology</option>
+									<option value="Anesthesiologist">Anesthesiology</option>
+									<option value="Audiologist">Audiologist</option>
+									<option value="Ayurveda">Ayurveda</option>
+									<option value="Cardiac Electrophysiologist">Cardiac Electrophysiology</option>
+									<option value="Cardiologist">Cardiology</option>
+									<option value="Cardiothoracic Surgeon">Cardiothoracic Surgeon</option>
+									<option value="Colorectal Surgeon">Colorectal Surgeon</option><option value="Cosmetic Surgeon">Cosmetic Surgeon</option><option value="Dentist">Dentistry</option><option value="Dermatologist">Dermatology</option><option value="Developmental Pediatrician">Developmental Pediatrics</option><option value="Diabetologist">Diabetology</option><option value="Ear-Nose-Throat Specialist (ENT)">Ear-Nose-Throat(ENT)</option><option value="Embryologist">Embryology  Services</option><option value="Emergency Medicine Physician">Emergency Medicine Clinic</option><option value="Endocrinologist">Endocrinology</option><option value="Endodontist">Endodontist</option><option value="Epidemiologist">Epidemiology</option><option value="Family Practitioner">Family Practitioner</option><option value="Fitness Center">Fitness Center</option><option value="Gastroenterologist">Gastroenterology</option><option value="General Physician">General Medicine</option><option value="General Surgeon">General Surgery</option><option value="Geneticist">Geneticis</option><option value="Gym">Gym</option><option value="Hand Surgeon">Hand Surgery</option><option value="Hematologist">Hematology</option><option value="Homeopathy">Homeopathy</option><option value="Infectious Disease Specialist">Infectious Disease</option><option value="Infertility Clinic">Infertility Clinic</option><option value="Integrated Medicine">Integrated Medicine</option><option value="Internist">Internist</option><option value="Laboratory Medicine Specialist">Laboratory Medicine</option><option value="Nephrologist">Nephrology</option><option value="Neurologist">Neurology</option><option value="Neurosurgeon">Neurosurgery</option><option value="Nuclear Medicine Specialist">Nuclear Medicine</option><option value="Nutritionist">Nutrition</option><option value="Obstetrician/Gynecologist">Obstetrics/Gynaecology</option><option value="Occupational Therapist">Occupational Therapy</option><option value="Oncologist">Oncology</option><option value="Ophthalmologist">Ophthalmology</option><option value="Oral Surgeon">Oral Surgery</option><option value="Orthodontist">Orthodontics</option><option value="Orthopedic Surgeon">Orthopedic Surgery</option><option value="Pain Management Specialist">Pain Management</option><option value="Pathologist">Pathology</option><option value="Pediatric Dentist">Pediatric Dentistry</option><option value="Pediatric Surgery">Pediatric Surgeon</option><option value="Pediatrician">Pediatrics</option><option value="Periodontist">Periodontistry</option><option value="Physical Medicine and Rehab Specialist">Physical Medicine and Rehab</option><option value="Physical Therapist">Physical Therapy</option><option value="Physiotherapist">Physiotherapist</option><option value="Plastic Surgeon">Plastic Surgery</option><option value="Podiatrist">Podiatry</option><option value="Polyclinic">Polyclinic</option><option value="Pranic Healing">Pranic Healing</option><option value="Primary Care Doctor">Primary Care</option><option value="Prosthodontist">Prosthodontistry</option><option value="Psychiatrist">Psychiatry</option><option value="Psychologist">Psychology</option><option value="Public Health Professional">Public Health</option><option value="Pulmonologist">Pulmonology</option><option value="Radiation Oncologist">Radiation Oncology</option><option value="Radiologist">Radiology</option><option value="Rheumatologist">Rheumatology</option><option value="Sexual Medicine/Sexology">Sexual Medicine/Sexology</option><option value="Sleep Disorders">Sleep Disorders</option><option value="Spa and Saloon">Spa and Saloon</option><option value="Speech Therapist">Speech Therapist</option><option value="Sports Medicine">Sports Medicine Specialist</option><option value="Trichology">Trichology</option><option value="Urologist">Urology</option><option value="Vascular Surgeon">Vascular Surgery</option><option value="Veterinary Physician">Veterinary</option><option value="Wellness Centre">Wellness Centre</option><option value="Yoga Therapy">Yoga Therapy</option><option value="Yoga">Yoga</option>
+								</select>
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>Experience : </td>
+							<td>
+								<input type="number" name="experience" class="form-control" 
+								data-ng-model="userInformation.experience" 
+								placeholder="Enter Experience"
+								required="required">
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>Contact Number :</td>
+							<td>
+								<input type="number" name="phoneNumber" class="form-control" 
+								data-ng-model="userInformation.phoneNumber"
+								placeholder="Enter Contact Number" required="required">
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>Address :</td>
+							<td>
+								<input type="text" name="address" class="form-control" 
+								data-ng-model="userInformation.address" googleplace1 required="required">
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>City :</td>
+							<td>
+								<input type="text" name="city" class="form-control" 
+								data-ng-model="userInformation.city"
+								placeholder="Enter City"
+								 required="required">
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td>Country :</td>
+							<td>
+							
+								<select name="country" class="form-control" 
+								data-ng-model="userInformation.country"
+								required="required">
+								<option 
+								
+           						 data-ng-repeat="countrie in countries"
+            					 value="{{countrie.name}}">
+      							 {{countrie.name}}
+    							</option>
+								 </select>
+								<!-- <input type="text" name="country" class="form-control" 
+								data-ng-model="userInformation.country"
+								placeholder="Enter Country"
+								 required="required"> -->
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect" style="display: none;">
+							<td>Detected TimeZone :
+							<!-- {{userInformation.userTimeZone}} -->
+							</td>
+							<td >
+							
+								<select  name="userTimeZone" id="repeatSelect" class="form-control"
+								    data-ng-model="userInformation.userTimeZone" 
+								    data-ng-options="option as option for option in $root.timezonesList">
+								</select>
+							</td>
+						</tr>
+						<tr data-ng-show="isBussnessSelect">
+							<td colspan="2">
+								<button type="submit" class="btn btn-success">Done</button>
+							</td>
+							
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

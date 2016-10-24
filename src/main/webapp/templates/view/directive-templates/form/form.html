@@ -1,0 +1,41 @@
+<div class="col-md-12 col-sm-12 col-xs-12" align="center">
+	<div class="col-md-3 col-sm-12 col-xs-12"></div>
+	<div id="formVieBackGround" class="col-md-6 col-sm-12 col-xs-12" align="left">
+		<div id="formContianer" class="col-md-12 col-sm-12 col-xs-12">
+			<h2>{{ form.formname }}</h2>
+		
+			<div ng-show="!form.submitted">
+			    <div class="field row">
+			        <div class="span2">Form ID:</div>
+			        <div class="span4">{{ form.formId }}</div>
+			    </div>
+			    <form name="myForm" id="myForm">
+			        <div ng-repeat="field in form.formfields">
+			            <field-directive field="field">
+			
+			            </field-directive>
+			        </div>
+			    </form>
+			
+			
+			    <div class="form-actions">
+			        <p class="text-center">
+			            <button class="btn btn-success right" type="button" ng-disabled="!myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Submit Form</button>
+			            <button class="btn btn-danger right" type="button" ng-click="cancel()"><i class="icon-remove icon-white"></i> Cancel</button>
+			        </p>
+			    </div>
+			</div>
+			
+			<div ng-show="form.submitted">
+			    <h3>Submitted Data</h3>
+			    <div ng-repeat="field in form.formfields">
+			        Field Title: {{ field.fieldtitle }} <br>
+			        Field Value: {{ field.fieldvalue }} <br><br>
+			    </div>
+			</div>
+		</div>
+		
+	</div>
+
+	
+</div>

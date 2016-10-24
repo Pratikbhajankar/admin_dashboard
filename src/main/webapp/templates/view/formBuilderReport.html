@@ -1,0 +1,109 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				</div>
+				
+				<!-- contentWill go here -->
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+					
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					<!-- {{appointmentDate}} -->
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							
+							<label>Select date</label> 
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<input type="text" data-ng-model="intractionDate" placeholder="dd/mm/yyy"
+						 class="form-control" style="width: 200px;" jqdatepicker readonly="readonly" data-ng-change="getFormBulderData()">
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<button class="btn btn-success pull-right" data-ng-click="intractionDate = '';getFormBulderData()" style="display: none;">Show all</button>
+						</div>
+						
+						
+						
+						 
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" data-ng-hide="builderIntractionDataList.length">
+						<h4>No data available</h4>
+					</div>
+					<!-- <div class="col-md-6 col-sm-12 col-xs-12"  data-ng-repeat="builderIntraction in builderIntractionDataList" style="display: none;">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="col-md-4 col-sm-12 col-xs-12">
+								<h4>{{builderIntraction.inractionDateString}}</h4>
+							</div>
+							<div class="col-md-8 col-sm-12 col-xs-12">
+							<h4>Contact Person: {{builderIntraction.userMaster.userFname}} {{builderIntraction.userMaster.userLName}} </h4>
+								
+							</div>
+							
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 list-group">
+							<div class="col-md-12 col-sm-12 col-xs-12 list-group-item" data-ng-repeat="formfield in builderIntraction.formMainModel.formfields">
+								<div class="col-md-5 col-sm-5 col-xs-5">
+									<label>{{formfield.fieldtitle}}</label>
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-7">
+									{{formfield.fieldvalue}}
+								</div>
+							</div>
+								
+						</div>
+						<hr>
+					</div> -->
+					<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="builderIntractionDataList.length">
+					<h4>{{intractionDate}}</h4>
+					<button class="btn btn-link" data-ng-click="exportToExcel('#formBuilderDataTable')" download="myTable.csv">
+			       	 <span class="glyphicon glyphicon-share"></span> Export to Excel
+			    	</button>
+			    	<!-- <label>Search: <input data-ng-model="searchKeyword"></label> -->
+					<hr>
+						<!-- {{builderIntractionDataList}} -->
+						<table id="formBuilderDataTable" class="col-md-12 col-sm-12 col-xs-12 table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th style="min-width: 163px !important;">Date And time</th>
+									<th style="min-width: 163px !important;">Contact Person Name</th>
+									<th data-ng-repeat="(key,value) in columndata">{{key}}</th>
+								</tr>
+							</thead>
+							<!-- <tr>
+								<td data-ng-repeat="(key,value) in columndata">
+									<table class="table table-bordered">
+										<tr data-ng-repeat="columnval in  value track by $index" style="line-height: 37px;">
+											<td style="height: 37px">{{columnval}}</td>
+										</tr>
+									</table>
+								</td>
+								
+							</tr> -->
+							<tr data-ng-repeat="builderIntraction in builderIntractionDataList">
+								<td>{{builderIntraction.insetrdDateEpocheString}}</td>
+								<td>{{builderIntraction.userMaster.userFname}} {{builderIntraction.userMaster.userLName}}</td>
+								<td data-ng-repeat="(key,value) in columndata">
+									<span data-ng-repeat="formfields in builderIntraction.formMainModel.formfields" data-ng-if="key == formfields.fieldtitle">
+										{{formfields.fieldvalue}}
+									</span>
+								</td>
+								
+							
+							</tr>
+						</table>
+					</div>
+					
+				</div>
+				
+				
+			</div>
+		</div>
+
+</div>

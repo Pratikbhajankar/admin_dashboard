@@ -1,0 +1,236 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				</div>
+				
+				<!-- contentWill go here -->
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+					<!-- {{appointmentDate}} -->
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<label>Select date</label> 
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<input type="text" data-ng-model="appointmentDate" placeholder="dd/mm/yyy"
+						 class="form-control" style="width: 200px;" jqdatepicker readonly="readonly" data-ng-change="getAppoitnmentIntrData()">
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<button class="btn btn-success pull-right" data-ng-click="appointmentDate = '';getAppoitnmentIntrData()" style="display: none;">Show all</button>
+						</div>
+						
+						
+						
+						 
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" data-ng-hide="appotServIntractDataList.length">
+						<h4>No data available</h4>
+					</div>
+					
+					<!-- {{OtherAppointmentRunning}} -->
+					<div class="col-md-12 col-sm-12 col-xs-12" data-ng-repeat="appotIntratdata in appotServIntractDataList" >
+						<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="appotServIntractDataList.length">
+							<div class="col-md-6 col-sm-12 col-xs-12"><h4>Date: {{appotIntratdata.appointmentDate}}</h4></div>
+							<div class="col-md-6 col-sm-12 col-xs-12" align="right"><label>Search: <input data-ng-model="simpleFilter"></label></div>
+							
+						</div>
+						
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										
+										<a href="javascript:void(0);" ng-click="sortType = 'time'; sortReverse = !sortReverse;">
+									        Time
+									        <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-down"></span>
+									        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-up"></span>
+									    </a>
+									</th>
+									<th>
+										
+										<a href="javascript:void(0);" ng-click="sortType = 'requestedUserid'; sortReverse = !sortReverse">
+									        Name
+									        <span ng-show="sortType == 'requestedUserid' && !sortReverse" class="fa fa-caret-down"></span>
+									        <span ng-show="sortType == 'requestedUserid' && sortReverse" class="fa fa-caret-up"></span>
+									    </a>
+									</th>
+									<th data-ng-show="appointmentMode == 2">
+										
+										<a href="javascript:void(0);" ng-click="sortType = 'nextTokenNumber'; sortReverse = !sortReverse">
+									        Token Number
+									        <span ng-show="sortType == 'nextTokenNumber' && !sortReverse" class="fa fa-caret-down"></span>
+									        <span ng-show="sortType == 'nextTokenNumber' && sortReverse" class="fa fa-caret-up"></span>
+									    </a>
+									</th>
+									<th style="display: none;">
+										
+										<a href="javascript:void(0);">
+											Selected Services
+										</a>
+									       	
+									    
+									</th>
+									<th style="width: 200px;"> 
+										 <a href="javascript:void(0);">
+											Action
+										</a>
+									</th>
+								</tr>
+							</thead>
+							<tr data-ng-repeat="dataofUserForAppt in appotIntratdata.appointmentdata.dataofUserForAppointment | filter:simpleFilter | orderBy:sortType:sortReverse" 
+							data-ng-class="{'odd': dataofUserForAppt.status ==1}" data-ng-show="dataofUserForAppt.status != 2">
+								<td>
+									<button class="btn btn-xs btn-warning" data-ng-click="editAppointment(dataofUserForAppt)">
+										<i class="fa fa-pencil-square-o"></i>
+									</button> &nbsp;&nbsp;
+									{{dataofUserForAppt.time}}
+								</td>
+								<td>{{dataofUserForAppt.userMaster.userFname}} {{dataofUserForAppt.userMaster.userLName}}</td>
+								<td data-ng-show="appointmentMode == 2">{{dataofUserForAppt.nextTokenNumber}}</td>
+								
+								<td style="display: none;">
+									<span data-ng-repeat="(key, value) in  dataofUserForAppt.servicesSelected track by $index">
+										{{value}},
+									</span>
+								</td>
+								<td>
+									<i class="fa fa-flag btn-xs btn-primary" data-ng-show="dataofUserForAppt.status == 1" title="Running"></i>
+									
+									
+									<button class="btn btn-xs btn-success" data-ng-click="changeStatus(dataofUserForAppt,1)"
+									 data-ng-hide="dataofUserForAppt.status == 2 || dataofUserForAppt.status == 1">
+										Running
+									</button>
+									
+									<button class="btn btn-xs btn-danger" data-ng-click="changeStatus(dataofUserForAppt,2)" data-ng-show="dataofUserForAppt.status == 1">
+										Completed
+									</button>
+									<span class="btn btn-sm btn-info" title="cancel"
+									data-ng-show="dataofUserForAppt.status == 1" data-ng-click="changeStatus(dataofUserForAppt,0)" >
+										<i class="fa fa-undo"></i>
+									</span>
+									
+								</td>
+							</tr>
+							<tr>
+								<th colspan="4" align="center" style="text-align: center;">
+									Completed Appointment
+								</th>
+							</tr>
+							<tr data-ng-repeat="dataofUserForAppt in appotIntratdata.appointmentdata.dataofUserForAppointment | filter:simpleFilter | orderBy:sortType:sortReverse" 
+							data-ng-class="{'odd': dataofUserForAppt.status ==1}" data-ng-show="dataofUserForAppt.status == 2">
+								<td>
+									<button class="btn btn-xs btn-warning" data-ng-click="editAppointment(dataofUserForAppt)">
+										<i class="fa fa-pencil-square-o"></i>
+									</button> &nbsp;&nbsp;
+									{{dataofUserForAppt.time}}
+								</td>
+								<td>{{dataofUserForAppt.userMaster.userFname}} {{dataofUserForAppt.userMaster.userLName}}</td>
+								<td data-ng-show="appointmentMode == 2">{{dataofUserForAppt.nextTokenNumber}}</td>
+								
+								<td style="display: none;">
+									<span data-ng-repeat="(key, value) in  dataofUserForAppt.servicesSelected track by $index">
+										{{value}},
+									</span>
+								</td>
+								<td>
+								
+									<button class="btn btn-xs btn-success" data-ng-click="changeStatus(dataofUserForAppt,1)"
+									 data-ng-hide="dataofUserForAppt.status == 2 || dataofUserForAppt.status == 1">
+										Running
+									</button>
+									
+									<button class="btn btn-xs btn-danger" data-ng-click="changeStatus(dataofUserForAppt,2)" data-ng-show="dataofUserForAppt.status !=2">
+										Completed
+									</button>
+									<span class="btn btn-sm btn-info" title="cancel"
+									data-ng-show="dataofUserForAppt.status !=2" data-ng-click="changeStatus(dataofUserForAppt,0)">
+										<i class="fa fa-undo"></i>
+									</span>
+									
+								</td>
+							</tr>
+						</table>
+						<hr>
+						<!-- {{appotIntratdata}} -->
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+		<div id="myModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h4 class="modal-title">Modal Header</h4>
+		      </div>
+		      <div class="modal-body" id="myModal-body">
+		        <div class="col-md-12 col-sm-12 col-xs-12">
+		        	<div class="col-md-6 col-sm-6 col-xs-6">
+		        		<button class="btn btn-sm btn-info" title="edit" data-ng-click="isdataEditAllow = !isdataEditAllow" data-ng-hide="isdataEditAllow"><i class="fa fa-pencil-square-o"></i></button>
+		        		<button class="btn btn-sm btn-warning" title="cancel" data-ng-click="isdataEditAllow = !isdataEditAllow;editCacelClick()" data-ng-show="isdataEditAllow"><i class="fa fa-times"></i></button>
+		        	</div>
+		        	<div class="col-md-6 col-sm-6 col-xs-6">
+		        		<button class="btn btn-sm btn-danger pull-right" title="Cancel" data-ng-click="deleteAppointment()"><i class="fa fa-trash"></i></button>
+		        	</div>
+		        	
+		        	<div class="col-md-12 col-sm-12 col-xs-12">
+		        	<br>
+			        	<div class="col-md-6 col-sm-6 col-xs-6">
+			        		<label>Name:</label>
+			        		
+			        		<span>{{dataofUserForApptNew.userMaster.userFname}} {{dataofUserForApptNew.userMaster.userLName}}</span>
+			        		 
+			        	</div>
+			        	<div class="col-md-6 col-sm-6 col-xs-6">
+			        		<label>Appointment Date:</label>
+			        		
+			        		<span data-ng-hide="isdataEditAllow">{{dataofUserForApptNew.bookingTime}}</span>
+			        		<span data-ng-show="isdataEditAllow">
+			        			<input type="text" data-ng-model = "dataofUserForApptNew.bookingTime" placeholder="dd/mm/yyy"
+						 class="form-control" style="width: 200px;" jqdatepicker readonly="readonly">
+			        		</span> 
+			        	</div>
+			        	<div class="col-md-6 col-sm-6 col-xs-6">
+			        		<label>Token Number:</label>
+			        		
+			        		<span data-ng-hide="isdataEditAllow">{{dataofUserForApptNew.nextTokenNumber}}</span>
+			        		<span data-ng-show="isdataEditAllow">
+			        			<input type="number"  class="form-control" style="width: 200px;" data-ng-model="dataofUserForApptNew.nextTokenNumber" disabled="disabled">
+			        		</span> 
+			        	</div>
+			        	<div class="col-md-6 col-sm-6 col-xs-6">
+			        		<label>Time:</label>
+			        		<span data-ng-hide="isdataEditAllow">{{dataofUserForApptNew.time}}</span> 
+			        		<span data-ng-show="isdataEditAllow" >
+			        			<select  class="form-control" style="width: 200px;" data-ng-model="dataofUserForApptNew.time" data-ng-options="o as o for o in appointmentSlotString"></select>
+			        		</span> 
+			        	</div>
+			        	
+		        	</div>
+		        	
+
+		        </div>
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-success" data-ng-click="updateAppointmentData()">Save</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+		
+</div>

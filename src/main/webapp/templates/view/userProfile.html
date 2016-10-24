@@ -1,0 +1,198 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				</div>
+				
+				<!-- contentWill go here -->
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+					<hr>
+					<div class="col-md-4 col-sm-12 col-xs-12">
+						<div class="pull-left">
+							<img alt="" data-ng-src="{{$root.userProfileUrl}}" title="{{userProfile.userMaster.userFname}}" class="img-circle" style="width: 100px;height: 95px;">
+						</div>
+						<div class="pull-left">
+							
+							<form action="./rest/v1/user/file/uploadFile" id="imageUploadForm" data-ng-upload="complete(content)">
+						   		 <input type="hidden" class="form-control" 
+						   		
+						   		 id = "commentText" placeholder="Enter Comment">
+						   		
+						   		 
+						   		<div class="image-upload">
+								    <label for="file-input">
+								        <i class="fa fa-pencil" title="Change Image"></i>
+								    </label>
+								
+								    <input id="file-input" file-Upload type="file" name="file"/>
+								</div>
+						   		 
+							    
+							     
+							    
+							     <input type="submit" id="imageUploadFormSubmit" value="Upload" style="display: none;" ng-disabled="$isUploading"></input>
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									{{fileUploadMasg}}
+								</div>
+							</form>
+							
+						</div>
+						
+						<div class="pull-left" style="width: 100%;">
+							<h3>{{initial}} {{userProfile.userMaster.userFname}} {{userProfile.userMaster.userLName}}</h3>
+							<h4>{{userProfile.userMaster.emailId}}</h4>
+							<h4>{{userProfile.address}}</h4>
+							<h4>{{userProfile.orgName}}</h4>
+						</div>
+
+						
+						
+						
+					</div>	
+					<div class="col-md-7 col-sm-12 col-xs-12">
+						
+						<form class="form-horizontal" name="profileForm" data-ng-submit="saveprofileFormData()" method="post">
+							<div class="form-group">
+							 	<h4>General Information</h4>
+							</div>	
+							 <div class="form-group">
+					            <label class="col-lg-4 control-label">First name:</label>
+					            <div class="col-lg-8">
+					              <!-- <span data-ng-show="isEditAllow">{{userProfile.userMaster.userFname}}</span> -->
+					              <input class="form-control" type="text" data-ng-model="userProfile.userMaster.userFname" data-ng-disabled="isEditAllow">
+					            </div>
+					         </div>
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">Last name:</label>
+					            <div class="col-lg-8">
+					              
+					              <input class="form-control" type="text" data-ng-model="userProfile.userMaster.userLName" data-ng-disabled="isEditAllow">
+					            </div>
+					         </div>
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">Email Address:</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="email" data-ng-model="userProfile.userMaster.emailId" disabled="disabled">
+					            </div>
+					         </div>
+					         
+					         <hr>
+					         
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">Organization Name:</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="text" data-ng-model="userProfile.orgName" data-ng-disabled="isEditAllow">
+					            </div>
+					         </div>
+					         
+					         
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">Experience :</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="number" data-ng-model="userProfile.experience" data-ng-disabled="isEditAllow">
+					            </div>
+					         </div>
+					         <div class="form-group" data-ng-show="userProfile.userBussiness.bussinessTypeId ==1">
+					            <label class="col-lg-4 control-label">Speciality :</label>
+					            <div class="col-lg-8">
+					            
+					            
+					             <select name=speciality class="form-control" data-ng-model="userProfile.speciality" data-ng-disabled="isEditAllow">
+					             	<option value="Acupuncture" selected="selected">Acupuncture</option>
+									<option value="Allergist/Immunologist">Allergy / Immunology</option>
+									<option value="Anesthesiologist">Anesthesiology</option>
+									<option value="Audiologist">Audiologist</option>
+									<option value="Ayurveda">Ayurveda</option>
+									<option value="Cardiac Electrophysiologist">Cardiac Electrophysiology</option>
+									<option value="Cardiologist">Cardiology</option>
+									<option value="Cardiothoracic Surgeon">Cardiothoracic Surgeon</option>
+									<option value="Colorectal Surgeon">Colorectal Surgeon</option><option value="Cosmetic Surgeon">Cosmetic Surgeon</option><option value="Dentist">Dentistry</option><option value="Dermatologist">Dermatology</option><option value="Developmental Pediatrician">Developmental Pediatrics</option><option value="Diabetologist">Diabetology</option><option value="Ear-Nose-Throat Specialist (ENT)">Ear-Nose-Throat(ENT)</option><option value="Embryologist">Embryology  Services</option><option value="Emergency Medicine Physician">Emergency Medicine Clinic</option><option value="Endocrinologist">Endocrinology</option><option value="Endodontist">Endodontist</option><option value="Epidemiologist">Epidemiology</option><option value="Family Practitioner">Family Practitioner</option><option value="Fitness Center">Fitness Center</option><option value="Gastroenterologist">Gastroenterology</option><option value="General Physician">General Medicine</option><option value="General Surgeon">General Surgery</option><option value="Geneticist">Geneticis</option><option value="Gym">Gym</option><option value="Hand Surgeon">Hand Surgery</option><option value="Hematologist">Hematology</option><option value="Homeopathy">Homeopathy</option><option value="Infectious Disease Specialist">Infectious Disease</option><option value="Infertility Clinic">Infertility Clinic</option><option value="Integrated Medicine">Integrated Medicine</option><option value="Internist">Internist</option><option value="Laboratory Medicine Specialist">Laboratory Medicine</option><option value="Nephrologist">Nephrology</option><option value="Neurologist">Neurology</option><option value="Neurosurgeon">Neurosurgery</option><option value="Nuclear Medicine Specialist">Nuclear Medicine</option><option value="Nutritionist">Nutrition</option><option value="Obstetrician/Gynecologist">Obstetrics/Gynaecology</option><option value="Occupational Therapist">Occupational Therapy</option><option value="Oncologist">Oncology</option><option value="Ophthalmologist">Ophthalmology</option><option value="Oral Surgeon">Oral Surgery</option><option value="Orthodontist">Orthodontics</option><option value="Orthopedic Surgeon">Orthopedic Surgery</option><option value="Pain Management Specialist">Pain Management</option><option value="Pathologist">Pathology</option><option value="Pediatric Dentist">Pediatric Dentistry</option><option value="Pediatric Surgery">Pediatric Surgeon</option><option value="Pediatrician">Pediatrics</option><option value="Periodontist">Periodontistry</option><option value="Physical Medicine and Rehab Specialist">Physical Medicine and Rehab</option><option value="Physical Therapist">Physical Therapy</option><option value="Physiotherapist">Physiotherapist</option><option value="Plastic Surgeon">Plastic Surgery</option><option value="Podiatrist">Podiatry</option><option value="Polyclinic">Polyclinic</option><option value="Pranic Healing">Pranic Healing</option><option value="Primary Care Doctor">Primary Care</option><option value="Prosthodontist">Prosthodontistry</option><option value="Psychiatrist">Psychiatry</option><option value="Psychologist">Psychology</option><option value="Public Health Professional">Public Health</option><option value="Pulmonologist">Pulmonology</option><option value="Radiation Oncologist">Radiation Oncology</option><option value="Radiologist">Radiology</option><option value="Rheumatologist">Rheumatology</option><option value="Sexual Medicine/Sexology">Sexual Medicine/Sexology</option><option value="Sleep Disorders">Sleep Disorders</option><option value="Spa and Saloon">Spa and Saloon</option><option value="Speech Therapist">Speech Therapist</option><option value="Sports Medicine">Sports Medicine Specialist</option><option value="Trichology">Trichology</option><option value="Urologist">Urology</option><option value="Vascular Surgeon">Vascular Surgery</option><option value="Veterinary Physician">Veterinary</option><option value="Wellness Centre">Wellness Centre</option><option value="Yoga Therapy">Yoga Therapy</option><option value="Yoga">Yoga</option>
+					             </select>
+					              <!-- <input class="form-control" type="text" data-ng-model="userProfile.speciality" data-ng-disabled="isEditAllow"> -->
+					            </div>
+					         </div>
+					         <div class="form-group" data-ng-show="userProfile.userBussiness.bussinessTypeId ==4">
+					            <label class="col-lg-4 control-label">Speciality :</label>
+					            <div class="col-lg-8">
+					            
+					           
+					             <select name=speciality class="form-control" data-ng-model="userProfile.speciality" data-ng-disabled="isEditAllow">
+					             	<option value="" selected="selected">--select--</option>
+									<option
+										data-ng-selected = "userProfile.speciality == constrnBuss.bussinessName"
+									 data-ng-repeat="constrnBuss in constrnBussType" value="{{constrnBuss.bussinessName}}">{{constrnBuss.bussinessName}}</option>
+					             </select>
+					              <!-- <input class="form-control" type="text" data-ng-model="userProfile.speciality" data-ng-disabled="isEditAllow"> -->
+					            </div>
+					         </div>
+					          <div class="form-group">
+					            <label class="col-lg-4 control-label">Contact Number :</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="number" data-ng-model="userProfile.phoneNumber" data-ng-disabled="isEditAllow" required="required">
+					            </div>
+					         </div>
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">Address :</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="text"  data-ng-model="userProfile.address" data-ng-disabled="isEditAllow" required="required" googleplace2>
+					            </div>
+					         </div>
+					         <div class="form-group">
+					            <label class="col-lg-4 control-label">City :</label>
+					            <div class="col-lg-8">
+					            	
+					              <input class="form-control" type="text" data-ng-model="userProfile.city" data-ng-disabled="isEditAllow" required="required">
+					            </div>
+					         </div>
+					         
+					        
+					          <div class="form-group">
+					            <label class="col-lg-4 control-label">Country :</label>
+					            <div class="col-lg-8">
+					              <select name="country" class="form-control" 
+									data-ng-model="userProfile.country"
+									required="required" data-ng-disabled="isEditAllow">
+										<option 
+										data-ng-selected = "userProfile.country == countrie.name"
+		           						 data-ng-repeat="countrie in countries"
+		            					 value="{{countrie.name}}">
+		      							 {{countrie.name}}
+		    							</option>
+									</select>	
+					             
+					            </div>
+					         </div>
+					       
+					         
+					         <hr>
+					          
+					         
+					         <div class="form-group" align="center">
+					         &nbsp;&nbsp;&nbsp;&nbsp;
+					         &nbsp;&nbsp;&nbsp;&nbsp;
+					         &nbsp;&nbsp;&nbsp;&nbsp;
+					         	<button  type="button" class="btn btn-info" data-ng-show="isEditAllow" data-ng-click="editForm(this)" ><i class="fa fa-pencil"></i> Edit&nbsp;</button>
+						         	&nbsp;&nbsp;&nbsp;&nbsp;
+					         	<button type="submit" class="btn btn-success">Save</button>
+					         </div>
+						</form>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+</div>

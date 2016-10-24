@@ -1,0 +1,84 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				 </div>
+				
+				<div class="col-md-6 col-sm-6 col-xs-6 Content-containerClass">
+					Which Service Do You Needed ?.
+					
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6 Content-containerClass" align="right">
+					<button data-ng-click="saveService(false)" class="btn btn-success">Save</button>
+					<button data-ng-click="saveService(true)" class="btn btn-success">Save And Proceed</button>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+				<div class="col-md-6 col-sm-6 col-xs-6">
+					<ul class="list-group">
+						
+						<li class="list-group-item" data-ng-repeat ="service in servicesList" >
+							<div data-toggle="collapse" data-target="#sertviceId{{$index}}" style="cursor: pointer;" >
+								<h3>{{service.serviceName}}</h3>
+								<span>
+									<input type="text" data-ng-model="service.servieDisplayName" placeholder="Services Display Name">
+									&nbsp;&nbsp; <i class="btn btn-info fa fa-plus" title="Add service" data-ng-click="addMoreServices(service)"></i>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-6">
+				<h3>Added Services</h3>
+				<ul class="list-group" droppable='serviceMap'
+                		ng-move='moveObject(from, to, fromList, toList)'
+                		ng-create='createObject(object, to, list)' >
+                		<li class="list-group-item" title="drag and drop to change Order" data-ng-repeat ="service in serviceMap" style="cursor: pointer;">
+                			<span data-ng-show="!service.editButtonShow" > {{service.servieDisplayName}}</span>
+                			<span data-ng-show="service.editButtonShow">
+                				<input type="text" data-ng-model="service.servieDisplayName">
+                			</span>
+                			<span class="pull-right">
+                				<i class="fa fa-floppy-o btn-success" data-ng-click="doneEditServieDisplayName(service)" data-ng-show="service.editButtonShow" title="Done"></i> 
+                				<i class="fa fa-pencil-square-o btn-info" data-ng-click="editServieDisplayName(service,$event)" data-ng-show="!service.editButtonShow" title="Edit Name"></i>
+                				&nbsp;&nbsp;<i class="btn-danger fa fa-trash-o" data-ng-click="deleteThis($index,service)" title="delete service"></i>
+                			</span>
+                		</li>
+                </ul>
+                </div>	
+					<!-- <ul class="list-group" droppable='servicesList'
+                		ng-move='moveObject(from, to, fromList, toList)'
+                		ng-create='createObject(object, to, list)' title="drag and drop to change position">
+						
+						<li class="list-group-item" data-ng-repeat ="service in servicesList" >
+							<div data-toggle="collapse" data-target="#sertviceId{{$index}}" style="cursor: pointer;" >
+								<h3>{{service.serviceName}}</h3>
+							</div>
+							
+							<hr>
+							<div id="sertviceId{{$index}}" class="collapse">
+								<ul class="list-group"  >
+									<li data-ng-repeat="serviceMap in service.serviceMap"  class="list-group-item">
+										<label>Services Display Name :</label>  <input type="text" data-ng-model="serviceMap.servieDisplayName">
+										<span></span>
+									</li>
+									
+								</ul>
+								
+							</div>
+							
+						</li>
+					</ul> -->
+					<!-- {{servicesList}} -->
+				</div>
+				
+			</div>
+		</div>
+</div>

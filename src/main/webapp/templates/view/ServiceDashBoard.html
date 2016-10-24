@@ -1,0 +1,1127 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<!-- <div class="col-md-2 col-sm-2 col-xs-2"> -->
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				 <div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				 </div>
+				 
+				
+				
+				
+			
+				<div class="tab-content col-md-12 col-sm-12 col-xs-12">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12" id="appoitnmentTab" data-ng-show="hasAppointmentSerivces">
+					<!-- <div class="col-md-12 col-sm-12 col-xs-12 headingClass">
+						<i class="fa fa-arrows-v"
+							title="Turn on Appointment Service"
+						></i>&nbsp;&nbsp; 
+						<input type="checkbox" class="" data-toggle="collapse"
+							title=" Turn on Appointment Service"
+						 data-target="#appoitnment">
+						Appointment Scheduling 
+					</div> -->
+					
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+						
+						<div class="pull-left"><h4>Appointment Scheduling</h4></div>
+						<a ng-href="#/appointmentReport/{{servicesData.appointment.idString}}/{{servicesData.appointment.formData.modeselected}}" class="btn btn-warning btn-sm pull-right">Report</a>
+						
+					 </div>
+					<div id="appoitnment" class="collapse in col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+						
+						<div class="col-md-3 col-sm-3 col-xs-3">
+						<p>
+								<input type="text" class="form-control"	name="displayService"  style="width: 250px;"
+								data-ng-disabled="servicesData.appointment.formEditDisabled"
+							data-ng-model="servicesData.appointment.formData.displayName" value="{{servicesData.appointment.servieDisplayName}}" placeholder="Service Display Name">
+								
+						</p>
+						</div>
+						<div class="col-md-9 col-sm-9 col-xs-9">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="col-md-9 col-sm-9 col-xs-9"></div>
+								<div class="col-md-3 col-sm-3 col-xs-3" align="right">
+									<button class="btn btn-primary" 
+										data-ng-show="servicesData.appointment.editButtonShow"
+									data-ng-click="showButton(servicesData.appointment)">Edit </button>
+									<button class="btn btn-success" 
+										data-ng-show="servicesData.appointment.saveButtonShow"
+									data-ng-click="saveValue(servicesData.appointment)">Save </button>
+									<button class="btn btn-warning" 
+										data-ng-show="servicesData.appointment.saveButtonShow"
+									data-ng-click="cancelSave(servicesData.appointment)">Cancel </button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-3 col-sm-6 col-xs-6">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<label >Working Days : </label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.monChecked"  id='workingday1'  value='MON' checked="checked"  data-ng-disabled="servicesData.appointment.formEditDisabled"> &nbsp; &nbsp;<label class = "label label-primary">MON</label> <br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.tueChecked"  id='workingday2' value='TUE' checked="checked"  data-ng-disabled="servicesData.appointment.formEditDisabled">  &nbsp; &nbsp;<label class = "label label-primary" >TUE</label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.wedChecked"  id='workingday3' value='WED' checked="checked"  data-ng-disabled="servicesData.appointment.formEditDisabled">  &nbsp; &nbsp;<label class = "label label-primary" >WED</label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.thuChecked"  id='workingday4' value='THU' checked="checked"  data-ng-disabled="servicesData.appointment.formEditDisabled">  &nbsp; &nbsp;<label class = "label label-primary" >THU</label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.friChecked"  id='workingday5' value='FRI' checked="checked"  data-ng-disabled="servicesData.appointment.formEditDisabled">  &nbsp; &nbsp;<label class = "label label-primary" >FRI</label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.satChecked"  id='workingday6' value='SAT'  data-ng-disabled="servicesData.appointment.formEditDisabled"> &nbsp; &nbsp;<label class = "label label-primary" >SAT</label><br>
+								 <input type = 'checkbox' data-ng-model="servicesData.appointment.formData.sunChecked"  id='workingday7' value='SUN'  data-ng-disabled="servicesData.appointment.formEditDisabled"> &nbsp; &nbsp;<label class = "label label-primary" >SUN</label><br>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+							
+							</div>
+							
+							 
+						</div>
+						<div class="col-md-9 col-sm-6 col-xs-6">
+							<div class="col-md-6 col-sm-12 col-xs-12">
+								<label style="white-space: nowrap;">Appointment Mode:</label>
+								<br>
+								<input type="radio" data-ng-model="servicesData.appointment.formData.modeselected" value="1" data-ng-disabled="servicesData.appointment.formEditDisabled"> Mode 1 
+								<input type="radio" data-ng-model="servicesData.appointment.formData.modeselected" value="2" data-ng-disabled="servicesData.appointment.formEditDisabled"> Mode 2
+							</div>	
+							<div class="col-md-6 col-sm-12 col-xs-12">
+								<label>  Appointment Duration  : </label> 
+								<select name="duration" id="duration"  data-ng-disabled="servicesData.appointment.formEditDisabled" class="form-control" data-ng-model="servicesData.appointment.formData.duration" style="width:200px;">
+									<option value="">--select duration--</option>
+									<option value="10">10 min</option>
+									<option value="15">15 min</option>
+									<option value="20">20 min</option>
+									<option value="25">25 min</option>
+									<option value="30">30 min</option>
+									<option value="45">45 min</option>
+									<option value="60">1 hr</option>
+									<option value="120">2 hr</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-9 col-sm-12 col-xs-12 nopaddingTime">
+						
+						
+						<div class="col-md-7 col-sm-12 col-xs-12 nopaddingTime margintop20px">
+							<div class="col-md-12 col-sm-12 col-xs-12 nopaddingTime">
+									<label>  Timing : </label> 
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12 nopaddingTime" data-ng-repeat="startEndTime in servicesData.appointment.formData.startEndTimeList">
+									
+									<div data-ng-if="$index == 0">
+										<div class="col-md-5 col-sm-5 col-xs-5">
+										<uib-timepicker ng-model="startEndTime.startTimeEpoche"
+										 readonly-input="true" show-spinners="!servicesData.appointment.formEditDisabled" 
+										 ng-change="changed()" hour-step="hstep"
+										 minute-step="mstep" 
+										 min="" 
+										 mousewheel = "!servicesData.appointment.formEditDisabled" 
+										 show-meridian="ismeridian">
+										 </uib-timepicker>
+										</div>
+										<div class="col-md-1 col-sm-1 col-xs-1">
+											<br data-ng-show="!servicesData.appointment.formEditDisabled">
+											<br data-ng-show="!servicesData.appointment.formEditDisabled">
+										     TO <!-- {{servicesData.appointment.formEditDisabled}} -->
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-5">
+											<uib-timepicker ng-model="startEndTime.endTimeEpoche" 
+											 readonly-input="true" show-spinners="!servicesData.appointment.formEditDisabled"
+											  mousewheel = "!servicesData.appointment.formEditDisabled"   
+											 ng-change="changed()" hour-step="hstep" minute-step="mstep" 
+											 min="startEndTime.startTimeEpoche" 
+											 show-meridian="ismeridian">
+											 </uib-timepicker>
+										</div>
+										<div class="col-md-1 col-sm-1 col-xs-1"></div>
+									</div>
+									<div data-ng-if="$index != 0">
+										<div class="col-md-5 col-sm-5 col-xs-5">
+										
+										<uib-timepicker ng-model="startEndTime.startTimeEpoche"  
+										  readonly-input="true" show-spinners="!servicesData.appointment.formEditDisabled"
+										   mousewheel = "!servicesData.appointment.formEditDisabled"  
+										  ng-change="changed()" hour-step="hstep"
+										  minute-step="mstep" 
+										  min="servicesData.appointment.formData.startEndTimeList[$index-1].endTimeEpoche"
+										  show-meridian="ismeridian">
+										</uib-timepicker>
+										</div>
+										<div class="col-md-1 col-sm-1 col-xs-1">
+											<br data-ng-show="!servicesData.appointment.formEditDisabled">
+											<br data-ng-show="!servicesData.appointment.formEditDisabled">
+											 TO
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-5">
+											<uib-timepicker ng-model="startEndTime.endTimeEpoche"
+											 readonly-input="true" show-spinners="!servicesData.appointment.formEditDisabled"
+											  mousewheel = "!servicesData.appointment.formEditDisabled"  
+											 ng-change="changed()" hour-step="hstep" 
+											 minute-step="mstep" min="startEndTime.startTimeEpoche" 
+											 max="servicesData.appointment.formData.startEndTimeList[$index+1].startEndTime"
+											 show-meridian="ismeridian">
+											</uib-timepicker>
+										</div>
+										<div class="col-md-1 col-sm-1 col-xs-1"><i class="fa fa-times" title="remove" data-ng-show="!servicesData.appointment.formEditDisabled" data-ng-click="removeTimeing($index)"></i></div>
+									</div>
+									
+									
+									
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<br>
+									<button class="btn btn-xs btn-info" data-ng-disabled="servicesData.appointment.formEditDisabled" data-ng-click="addMoreTime(servicesData.appointment.formData.startEndTimeList)">Add More</button>
+								</div>
+								
+								
+								<!-- <select name="startTime" style="display: none;" id="startTime"  data-ng-disabled="servicesData.appointment.formEditDisabled" data-ng-model="servicesData.appointment.formData.startTime">
+									<option value="5:00 AM">5:00 AM</option>
+									<option value="5:15 AM">5:15 AM</option>
+									<option value="5:30 AM">5:30 AM</option>
+									<option value="5:45 AM">5:45 AM</option>
+									
+									<option value="6:00 AM">6:00 AM</option>
+									<option value="6:15 AM">6:15 AM</option>
+									<option value="6:30 AM">6:30 AM</option>
+									<option value="6:45 AM">6:45 AM</option>
+									
+									<option value="7:00 AM">7:00 AM</option>
+									<option value="7:15 AM">7:15 AM</option>
+									<option value="7:30 AM">7:30 AM</option>
+									<option value="7:45 AM">7:45 AM</option>
+									
+									<option value="8:00 AM">8:00 AM</option>
+									<option value="8:15 AM">8:15 AM</option>
+									<option value="8:30 AM">8:30 AM</option>
+									<option value="8:45 AM">8:45 AM</option>
+									
+									<option value="9:00 AM">9:00 AM</option>
+									<option value="9:15 AM">9:15 AM</option>
+									<option value="9:30 AM">9:30 AM</option>
+									<option value="9:45 AM">9:45 AM</option>
+									
+									<option value="10:00 AM">10:00 AM</option>
+									<option value="10:15 AM">10:15 AM</option>
+									<option value="10:30 AM">10:30 AM</option>
+									<option value="10:45 AM">10:45 AM</option>
+									
+									<option value="11:00 AM">11:00 AM</option>
+									<option value="11:15 AM">11:15 AM</option>
+									<option value="11:30 AM">11:30 AM</option>
+									<option value="11:45 AM">11:45 AM</option>
+									
+									<option value="12:00 PM">12:00 PM</option>
+									<option value="12:15 PM">12:15 PM</option>
+									<option value="12:30 PM">12:30 PM</option>
+									<option value="12:45 PM">12:45 PM</option>
+									
+									<option value="1:00 PM">1:00 PM</option>
+									<option value="1:15 PM">1:15 PM</option>
+									<option value="1:30 PM">1:30 PM</option>
+									<option value="1:45 PM">1:45 PM</option>
+									
+									<option value="2:00 PM">2:00 PM</option>
+									<option value="2:15 PM">2:15 PM</option>
+									<option value="2:30 PM">2:30 PM</option>
+									<option value="2:45 PM">2:45 PM</option>
+									
+									<option value="3:00 PM">3:00 PM</option>
+									<option value="3:15 PM">3:15 PM</option>
+									<option value="3:30 PM">3:30 PM</option>
+									<option value="3:45 PM">3:45 PM</option>
+									
+									<option value="4:00 PM">4:00 PM</option>
+									<option value="4:15 PM">4:15 PM</option>
+									<option value="4:30 PM">4:30 PM</option>
+									<option value="4:45 PM">4:45 PM</option>
+									
+									<option value="5:00 PM">5:00 PM</option>
+									<option value="5:15 PM">5:15 PM</option>
+									<option value="5:30 PM">5:30 PM</option>
+									<option value="5:45 PM">5:45 PM</option>
+									
+									<option value="6:00 PM">6:00 PM</option>
+									<option value="6:15 PM">6:15 PM</option>
+									<option value="6:30 PM">6:30 PM</option>
+									<option value="6:45 PM">6:45 PM</option>
+									
+									<option value="7:00 PM">7:00 PM</option>
+									<option value="7:15 PM">7:15 PM</option>
+									<option value="7:30 PM">7:30 PM</option>
+									<option value="7:45 PM">7:45 PM</option>
+									
+									<option value="8:00 PM">8:00 PM</option>
+									<option value="8:15 PM">8:15 PM</option>
+									<option value="8:30 PM">8:30 PM</option>
+									<option value="8:45 PM">8:45 PM</option>
+									
+									<option value="9:00 PM">9:00 PM</option>
+									<option value="9:15 PM">9:15 PM</option>
+									<option value="9:30 PM">9:30 PM</option>
+									<option value="9:45 PM">9:45 PM</option>
+									
+									<option value="10:00 PM">10:00 PM</option>
+									<option value="10:15 PM">10:15 PM</option>
+									<option value="10:30 PM">10:30 PM</option>
+									<option value="10:45 PM">10:45 PM</option>
+									
+									<option value="11:00 PM">11:00 PM</option>
+									<option value="11:15 PM">11:15 PM</option>
+									<option value="11:30 PM">11:30 PM</option>
+									<option value="11:45 PM">11:45 PM</option>
+								</select>
+								 
+								  <select name="endTime" id="endTime" style="display: none;"   data-ng-disabled="servicesData.appointment.formEditDisabled" data-ng-model="servicesData.appointment.formData.endTime">
+									<option value="5:00 AM">5:00 AM</option>
+									<option value="5:15 AM">5:15 AM</option>
+									<option value="5:30 AM">5:30 AM</option>
+									<option value="5:45 AM">5:45 AM</option>
+									
+									<option value="6:00 AM">6:00 AM</option>
+									<option value="6:15 AM">6:15 AM</option>
+									<option value="6:30 AM">6:30 AM</option>
+									<option value="6:45 AM">6:45 AM</option>
+									
+									<option value="7:00 AM">7:00 AM</option>
+									<option value="7:15 AM">7:15 AM</option>
+									<option value="7:30 AM">7:30 AM</option>
+									<option value="7:45 AM">7:45 AM</option>
+									
+									<option value="8:00 AM">8:00 AM</option>
+									<option value="8:15 AM">8:15 AM</option>
+									<option value="8:30 AM">8:30 AM</option>
+									<option value="8:45 AM">8:45 AM</option>
+									
+									<option value="9:00 AM">9:00 AM</option>
+									<option value="9:15 AM">9:15 AM</option>
+									<option value="9:30 AM">9:30 AM</option>
+									<option value="9:45 AM">9:45 AM</option>
+									
+									<option value="10:00 AM">10:00 AM</option>
+									<option value="10:15 AM">10:15 AM</option>
+									<option value="10:30 AM">10:30 AM</option>
+									<option value="10:45 AM">10:45 AM</option>
+									
+									<option value="11:00 AM">11:00 AM</option>
+									<option value="11:15 AM">11:15 AM</option>
+									<option value="11:30 AM">11:30 AM</option>
+									<option value="11:45 AM">11:45 AM</option>
+									
+									<option value="12:00 PM">12:00 PM</option>
+									<option value="12:15 PM">12:15 PM</option>
+									<option value="12:30 PM">12:30 PM</option>
+									<option value="12:45 PM">12:45 PM</option>
+									
+									<option value="1:00 PM">1:00 PM</option>
+									<option value="1:15 PM">1:15 PM</option>
+									<option value="1:30 PM">1:30 PM</option>
+									<option value="1:45 PM">1:45 PM</option>
+									
+									<option value="2:00 PM">2:00 PM</option>
+									<option value="2:15 PM">2:15 PM</option>
+									<option value="2:30 PM">2:30 PM</option>
+									<option value="2:45 PM">2:45 PM</option>
+									
+									<option value="3:00 PM">3:00 PM</option>
+									<option value="3:15 PM">3:15 PM</option>
+									<option value="3:30 PM">3:30 PM</option>
+									<option value="3:45 PM">3:45 PM</option>
+									
+									<option value="4:00 PM">4:00 PM</option>
+									<option value="4:15 PM">4:15 PM</option>
+									<option value="4:30 PM">4:30 PM</option>
+									<option value="4:45 PM">4:45 PM</option>
+									
+									<option value="5:00 PM">5:00 PM</option>
+									<option value="5:15 PM">5:15 PM</option>
+									<option value="5:30 PM">5:30 PM</option>
+									<option value="5:45 PM">5:45 PM</option>
+									
+									<option value="6:00 PM">6:00 PM</option>
+									<option value="6:15 PM">6:15 PM</option>
+									<option value="6:30 PM">6:30 PM</option>
+									<option value="6:45 PM">6:45 PM</option>
+									
+									<option value="7:00 PM">7:00 PM</option>
+									<option value="7:15 PM">7:15 PM</option>
+									<option value="7:30 PM">7:30 PM</option>
+									<option value="7:45 PM">7:45 PM</option>
+									
+									<option value="8:00 PM">8:00 PM</option>
+									<option value="8:15 PM">8:15 PM</option>
+									<option value="8:30 PM">8:30 PM</option>
+									<option value="8:45 PM">8:45 PM</option>
+									<option value="9:00 PM">9:00 PM</option>
+									<option value="9:15 PM">9:15 PM</option>
+									<option value="9:30 PM">9:30 PM</option>
+									<option value="9:45 PM">9:45 PM</option>
+									
+									<option value="10:00 PM">10:00 PM</option>
+									<option value="10:15 PM">10:15 PM</option>
+									<option value="10:30 PM">10:30 PM</option>
+									<option value="10:45 PM">10:45 PM</option>
+									
+									<option value="11:00 PM">11:00 PM</option>
+									<option value="11:15 PM">11:15 PM</option>
+									<option value="11:30 PM">11:30 PM</option>
+									<option value="11:45 PM">11:45 PM</option>
+								</select> -->
+							
+							
+						</div>
+							
+							<div class="col-md-5 col-sm-12 col-xs-12 nopaddingTime margintop20px" data-ng-show="servicesData.appointment.formEditDisabled">
+								<button  class="btn btn-link" data-ng-disabled="servicesData.appointment.formEditDisabled" >
+									<div class="col-md-12 col-sm-12 col-xs-12">
+								
+								  <uib-datepicker ng-model='activeDate' 
+								  multi-select='servicesData.appointment.formData.selectedDates' 
+								  show-weeks="false"
+								  min-date="mindatecurrent"
+								  disabled = "servicesData.appointment.formEditDisabled"
+								  ></uib-datepicker>
+								 {{servicesData.appointment.formData.selectedDates}}
+								</div>
+								</button>
+							</div>
+							<div class="col-md-5 col-sm-12 col-xs-12 nopaddingTime margintop20px" data-ng-hide="servicesData.appointment.formEditDisabled">
+							
+							  <uib-datepicker ng-model='activeDate' 
+							  multi-select='servicesData.appointment.formData.selectedDates' 
+							  show-weeks="false"
+							  min-date="mindatecurrent"
+							  disabled = "servicesData.appointment.formEditDisabled"
+							  ></uib-datepicker>
+							 {{servicesData.appointment.formData.selectedDates}}
+							</div>	 
+						</div>
+						</div>
+						
+						<!-- <div class="col-md-12 col-sm-12 col-xs-12">
+						<br>
+						
+							<button class="btn btn-success" data-ng-click="saveValue(servicesData.appointment)">Save </button>
+						</div> -->
+						
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-sm-12 col-xs-12" id="imageGalleryTab" data-ng-show="hasImageGallerySerivces">
+					<!-- <div class="col-md-12 col-sm-12 col-xs-12 headingClass">
+						<input type="checkbox" class="" 
+							title="Turn on Gallery Service"
+						data-toggle="collapse" data-target="#imageGallery">
+						<i class="fa fa-arrows-v" 
+							title="Turn on Gallery Service"
+						 ></i>&nbsp;&nbsp;
+						
+					</div> -->
+					
+					 
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+						<h4>Image Gallery</h4>
+					 </div>
+					 <div id="imageGallery" class="collapse in col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+					   	<div class="col-md-3 col-sm-3 col-xs-3">
+						   	<form action="./rest/v1/user/file/uploadFile" id="imageUploadForm" data-ng-upload="complete(content,servicesData.imageGallery)">
+						   		 <input type="text" class="form-control" 
+						   		 data-ng-model="servicesData.imageGallery.commentText" 
+						   		 id = "commentText" placeholder="Enter Comment">
+						   		 <br>
+							     <div class="btn btn-success" title="Upload Image" style="cursor: pointer;    padding: 0px;">
+							     	<div align="center" style="float: left;width: 100px;height:32px;padding-top: 5px;" ><i class="fa fa-upload"></i> Upload</div>
+							     	<input type="file" name="file" required="required" id="imageGalleryFile"
+							      
+							       file-upload
+							       
+							      	style="opacity: 0;width: 100px;height:32px;cursor: pointer !important;position: absolute;border-radius: 5px;"
+							        ></input>
+							     </div>	
+							     
+							     <input type="hidden" name="_id" value="{{servicesData.imageGallery.idString">
+							     <input type="submit" id="imageUploadFormSubmit" value="Upload" style="display: none;" ng-disabled="$isUploading"></input>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								{{fileUploadMasg}}
+							</div>
+							</form>
+							
+					   	</div>
+					    
+						<div class="col-md-9 col-sm-9 col-xs-9">
+							<div data-ng-repeat="(key, value) in servicesData.imageGallery.formData.imageData" class="col-md-3 col-sm-3 col-xs-3" 
+								style="padding: 5px;float: left;min-height: 235px;"> 
+								<div style="width: 100%;float: left;" align="right" class="noselect">
+									<i class="fa fa-trash-o" data-ng-show="isTimesShow{{value.imageId}}" 
+									data-ng-click="deleteImageAndData(key)"
+									title="Delete image"></i>
+									&nbsp;&nbsp;
+									<i class="fa fa-times" data-ng-show="isTimesShow{{value.imageId}}" 
+									data-ng-click="showTimesBtn(value.imageId,false)"
+									title="Cancel"
+									></i>
+									<i class="fa fa-pencil" data-ng-hide="isTimesShow{{value.imageId}}" 
+									data-ng-click="showTimesBtn(value.imageId,true)"
+									title="Edit"
+									></i>
+								</div>
+								<div style="width: 100%;float: left;">
+									<img data-ng-src="./rest/v1/user/file/getImage?fileId={{value.imageId}}" alt="Description" 
+									style="width: 100%;height: 150px;float: left;" class=""/>
+								</div>
+								<div style="width: 100%;float: left;">
+									<br>
+									<span data-ng-hide="isTimesShow{{value.imageId}}">
+										{{value.comment}}
+									</span>
+									<span data-ng-show="isTimesShow{{value.imageId}}">
+										<input type="text" data-ng-model="value.comment" style="float: left;width: 80%;" class="form-control">
+										<i class="fa fa-check-square-o" style="float: right;" title="Save"
+										data-ng-click="saveImagedataEdited(value.imageId)"  
+										>
+											
+										</i>
+									</span>
+								</div>
+								
+								
+								
+								
+								
+							</div>
+							
+						</div>
+						<!-- <div class="col-md-12 col-sm-12 col-xs-12">
+							<br>
+					     	<button class="btn btn-success" data-ng-click="saveValue(servicesData.imageGallery)">Save </button>
+					     	 <br>
+						    <br>
+						</div> -->
+		  			</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" id="locationTab" data-ng-show="hasLocationServices">
+					<!-- <div class="col-md-12 col-sm-12 col-xs-12 headingClass">
+						<input type="checkbox" class="" 
+							title="Turn on Location Sharing"
+						data-toggle="collapse" data-target="#locatinSharing">
+						<i class="fa fa-arrows-v" title="Turn on Location Sharing" ></i>&nbsp;&nbsp;
+						
+						Location 
+					</div> -->
+					
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+						<h4>Location</h4>
+					 </div>
+					 <div id="locatinSharing" class="collapse in col-md-12 col-sm-12 col-xs-12 Content-containerClassLoaction">
+					   
+					    <div class="col-md-12 col-sm-12 col-xs-12">
+						     <input type="text" class="form-control" name="address" googleplace 
+						     data-ng-model = "servicesData.locationShare.formData.address" id="loactioNaddress" data-ng-blur="addressChange(servicesData.locationShare.formData.address)">
+					     	 <br>
+					     	 <button class="btn btn-success" data-ng-click="saveValue(servicesData.locationShare)">Save </button>
+					     	 &nbsp;&nbsp;&nbsp;&nbsp;
+					     	 <button class="btn btn-success" data-ng-click="useCurrentLocation()">Use Current Location </button>
+					     	 <br>
+						     <br>
+						    
+					     </div>
+					   <div class="col-md-12 col-sm-12 col-xs-12">
+					   	 <div id="locatinSharingmap" class="col-md-12 col-sm-12 col-xs-12">
+					    	
+					     </div>
+					   </div>
+					   
+					   
+					    <div class="col-md-12 col-sm-12 col-xs-12">
+					    	<br>
+					    <br>
+					    <br>
+					    </div>
+					    
+		  			</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12" id="serviceListTab" data-ng-show="hasServicesListServices">
+				<!-- <div class="col-md-12 col-sm-12 col-xs-12 headingClass">
+					<input type="checkbox" class="" 
+						title="Turn on Gallery Service"
+					data-toggle="collapse" data-target="#imageGallery">
+					<i class="fa fa-arrows-v" 
+						title="Turn on Gallery Service"
+					 ></i>&nbsp;&nbsp;
+					Services List
+				</div> -->
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+						<h4>Services List</h4>
+				</div>
+				 <div id="serviceList" class="collapse in col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+				   		<div class="col-md-12 col-sm-12 col-xs-12">
+				   			
+				   			
+				   			<table class="col-md-12 col-sm-12 col-xs-12 table">
+				   				<thead>
+				   					<tr>
+				   						<th>Service name</th>
+				   						<th>Price</th>
+				   						<th>Price Show ?.</th>
+				   						<th>Cancel</th>
+				   					</tr>
+				   				</thead>
+				   				<tr data-ng-repeat="viewData in servicesData.serviceList.formData.viewData">
+				   					<td>
+				   						<input type="text" data-ng-model="viewData.columnOne.featurOrSerivceName"
+				   						placeholder="{{viewData.columnOne.placeholder}}" class="form-control" style="width: 80%;">
+				   					</td>
+				   					<td>
+				   						<input type="number" data-ng-model="viewData.columntwo.featurOrSerivceNamePrice"
+				   						placeholder="{{viewData.columntwo.placeholder}}" class="form-control" style="width: 80%;">
+				   					</td>
+				   					<td>
+				   						<input type="checkbox" data-ng-model="viewData.columnThree.featurOrSerivceNameShowPrice">
+				   					</td>
+				   					<td>
+				   						<i class="fa fa-times" title="remove" data-ng-click="removeService($index)"></i>
+				   					</td>
+				   				</tr>
+				   				<tr>
+				   					<td colspan="4">
+				   						<button type="button" class="btn btn-info" data-ng-click="addMoreServiceFiled()"><i class="fa fa-plus"></i> Add</button>
+				   						
+				   						
+				   						<button class="btn btn-success" data-ng-click="saveValue(servicesData.serviceList)">Save </button>
+				   					</td>
+				   				</tr>
+				   			</table>
+				   			<!-- {{servicesData.serviceList.formData.viewData}} -->
+				   		</div>
+				 </div>
+			</div>
+			
+			<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass" id="formBulderTab" data-ng-show="hasContactFormServices">
+				<!-- <div class="col-md-12 col-sm-12 col-xs-12 headingClass">
+					
+					Form Bulder
+				</div> -->
+				<!-- <h4>Form Bulder</h4> -->
+				 <div id="formBulder" class="collapse in col-md-12 col-sm-12 col-xs-12"
+				 data-ng-controller="CreateCtrl" data-ng-include="'templates/view/create.html'">
+				   		<!-- <div ></div> -->
+				 </div>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass" id="discriptiveTab" data-ng-show="hasDiscrtitiveServices">
+				<div id="discriptive" class="collapse in col-md-12 col-sm-12 col-xs-12">
+					<br>
+					<!-- {{servicesData.discritiveData.formData}} -->
+					<!-- <textarea data-ck-editor data-ng-model="servicesData.discritiveData.formData.htmlText"	></textarea> -->
+					
+					
+					<!-- <textarea ui-tinymce ng-model="tinymceModel"></textarea> -->
+					<!-- <wysiwyg-edit content="servicesData.discritiveData.formData.htmlText"  data-ng-model="servicesData.discritiveData.formData.htmlText" config="servicesData.discritiveData.formData.editorConfig"></wysiwyg-edit> -->
+					<textarea ui-tinymce="tinymceOptions" data-ng-model="servicesData.discritiveData.formData.htmlText"></textarea>
+					<!-- <div ckeditor="options" data-ng-model="servicesData.discritiveData.formData.htmlText"></div> -->
+					<!-- <div text-angular ng-model="servicesData.discritiveData.formData.htmlText"></div> -->
+					<br>
+					<!-- {{servicesData.discritiveData.formData.htmlText}} -->
+					<br>
+					<button class="btn btn-success" data-ng-click="saveValue(servicesData.discritiveData)">Save </button>
+					
+				</div>
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass" id="seatPlannerServicesTab" data-ng-show="hasSeatPlannerServices">
+				<div id="seatPlannerServices" class="collapse in col-md-12 col-sm-12 col-xs-12">
+					<br>
+					<ul id = "myTab" class = "nav nav-tabs">
+						
+						<li class = "active" data-ng-click="tabClick('floorPlanTemples')">
+						   <a href = "javascript:void(0);#floorPlanTemples" data-toggle = "tab" >
+						      Floor Plan template
+						   </a>
+						</li>
+						<li data-ng-click="tabClick('mannageSession')">
+						   <a href = "javascript:void(0);#mannageSession" id="mannageSessionTab" data-toggle = "tab" >
+						      Manage Sessions
+						   </a>
+						
+						
+					</ul>
+
+					<div id = "myTabContent" class = "tab-content col-md-12 col-sm-12 col-xs-12">
+					
+					   <div  id = "mannageSession" class = "tab-pane fade col-md-12 col-sm-12 col-xs-12">
+							<br>
+							<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!showSessionAddnew">
+								
+										
+								<table class="table">
+									<tr data-ng-repeat="serviceMapSessions in servicesData.seatPlannerServicesData.formData.serviceMapSessionsList">
+										<td><label>{{serviceMapSessions.sessionName}}</label></td>
+										<td>
+										
+										<table class="table">
+											<!-- <tr>
+												<td colspan="5">
+													{{serviceMapSessions.floorPlanSessionData}}
+												</td>
+											</tr> -->
+											<tr>
+												
+												<td>{{serviceMapSessions.floorPlanSessionData.eventSessionDate}}</td>
+												<td>{{serviceMapSessions.floorPlanSessionData.eventSessionStartTime}}</td>
+												<td>{{serviceMapSessions.floorPlanSessionData.eventsessionEndTime}}</td>
+												<td>Before {{serviceMapSessions.floorPlanSessionData.eventBookingStartTime}} hr</td>
+												<td>
+													<a data-ng-href="#/seatPlanReport/{{serviceId}}/{{serviceMapSessions.floorPlanSessionData.stringId}}">
+													Report
+													</a>
+												</td>
+											</tr>
+											<tr data-ng-repeat="floorPlanSessionData in serviceMapSessions.floorPlanRecurciveSessionData"
+											data-ng-init = "isenabled = true"	>
+												
+												<td>
+												<input type="text" data-ng-model="floorPlanSessionData.eventSessionDate"
+								 			class="form-control" jqdatepickereventdate data-ng-disabled="isenabled"
+								 			readonly="readonly" placeholder="Select Date">
+												</td>
+												<td>
+												
+												<input type="text" data-ng-model="floorPlanSessionData.eventSessionStartTime"
+											 readonly="readonly" data-ng-disabled="isenabled"
+											 jqdatepicker55 class="form-control" placeholder="Select Session Start Time">
+												</td>
+												<td><!-- {{floorPlanSessionData.eventsessionEndTime}} -->
+													<input type="text" data-ng-model="floorPlanSessionData.eventsessionEndTime"
+											 readonly="readonly"  data-ng-disabled="isenabled"
+											 jqdatepicker55 class="form-control" placeholder="Select Session End Time">
+												</td>
+												<td>
+												<select data-ng-model="floorPlanSessionData.eventBookingStartTime"  data-ng-disabled="isenabled" class="form-control"
+												data-ng-include="'templates/view/subTemplates/timeDropDown3.html'" >
+												</select>
+												<!-- Before {{floorPlanSessionData.eventBookingStartTime}} hr</td> -->
+												<td>
+													<i class="fa fa-edit" data-ng-show="isenabled" title="Edit" 
+													data-ng-click="isenabled=!isenabled"></i>
+													
+													
+													<a data-ng-href="#/seatPlanReport/{{serviceId}}/{{floorPlanSessionData.stringId}}" target="_blank" data-ng-show="isenabled">
+														<i class="fa fa-file-text-o" title="Report"></i>
+													</a>
+													<i class="fa fa-floppy-o" data-ng-hide="isenabled" title="save"
+													 data-ng-click="saveFloorPlanShedule(floorPlanSessionData);isenabled=!isenabled"></i>
+												
+													<i class="fa fa-trash" data-ng-hide="isenabled" title="Delete"
+													 data-ng-click="deleteSessionSechduleData(floorPlanSessionData);isenabled=!isenabled"></i>
+													<i class="fa fa-times" data-ng-hide="isenabled" title="cancel"
+													 data-ng-click="isenabled=!isenabled"></i>
+												</td>
+											</tr>
+											</table>
+										<td>
+											<i class="fa fa-trash-o btn pull-right" title="delete"
+												data-ng-click="deleteFloorPlanSessionData(serviceMapSessions,$index)"
+											></i>
+										</td>
+										<td>
+											<button class="btn btn-info btn-sm pull-right" 
+											data-ng-click="getFloorPlanSessionDetailsWithNewImplemntation(serviceMapSessions,$index)">Get Session details</button>
+										</td>
+									</tr>
+								</table>
+								
+								<button class="btn btn-primary" data-ng-click="addNewSession()">
+									Add New Session
+								</button>
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="showSessionAddnew">
+								
+								<div class="col-md-12 col-sm-12 col-xs-12">
+								<table class="table">
+									<tr>
+										<td>Session Name:</td>
+										<td>
+											<input type="text" data-ng-model="session.eventSessioName"
+								 			class="form-control" placeholder="Enter Session Name">
+										</td>
+										<td>Event Date :</td>
+										<td>
+											<input type="text" data-ng-model="session.eventSessionDate"
+								 			class="form-control" jqdatepickereventdate 
+								 			readonly="readonly" placeholder="Select Date">
+										</td>
+									</tr>
+									<tr>
+										<td>Start Time </td>
+										<td>
+											<input type="text" data-ng-model="session.eventSessionStartTime"
+											 readonly="readonly" 
+											 jqdatepicker55
+											 
+											 class="form-control" placeholder="Select Session Start Time">
+										</td>
+										<td>End Time</td>
+										<td>
+											<input type="text" data-ng-model="session.eventsessionEndTime" 
+											 jqdatepicker55 readonly="readonly"
+											 class="form-control" placeholder="Select Session End Time">
+										</td>
+										
+									</tr>
+									<tr>
+										<td>Select Templates</td>
+										<td>
+											<select data-ng-model="session.sessionTemeplates" class="form-control">
+												<option value="" selected="selected">--select--</option>
+												<option data-ng-repeat="serviceMapTemplate in servicesData.seatPlannerServicesData.formData.serviceMapTemplatList"
+												value="{{serviceMapTemplate}}">
+													{{serviceMapTemplate.serviceMapName}}
+												</option>
+											</select>
+										</td>
+										<td>Booking Start From</td>
+										<td>
+										<select data-ng-model="session.eventBookingStartTime" class="form-control"
+												data-ng-include="'templates/view/subTemplates/timeDropDown2.html'" >
+										</select>
+											
+										</td>
+									</tr>
+									<tr>
+										<td>Description: </td>
+										<td colspan="3">
+											<textarea rows="5" cols="40" style="resize: vertical;"
+											placeholder="Enter Discription" 
+											data-ng-model="session.eventSessionDescription" class="form-control">
+											</textarea>
+										</td>
+									</tr>
+									<tr>
+									
+										<td colspan="4">
+											<button class="btn btn-success" data-ng-click="addNewSessionDataToDb()">
+												Add Session
+											</button>
+											&nbsp;&nbsp;&nbsp;
+											<button class="btn btn-warning" data-ng-click="backToSessionlistDataData()">Back </button>
+											<!-- {{session}} -->
+										</td>
+									
+									</tr>
+								</table>
+								</div>
+							 </div>
+							
+							
+							
+						
+							<!-- <div id="sessionMoreDetailsModal" class="modal fade" role="dialog" style="z-index: 10000;">
+							  <div class="modal-dialog modal-lg" style="width: 90%;">
+							
+							    Modal content
+							    <div class="modal-content" style="width: 100%;">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal"
+							         data-ng-click="showmapViewClick =false;showMulitdatePicker = flase;tabClick('mannageSession');">&times;</button>
+							        <h4 class="modal-title">{{floorPlanSessionData.eventSessioName}}
+							        	
+							        </h4>
+							      </div>
+							      <div class="modal-body" id="">
+							      	<div style="clear: both;height: 20px;"></div>
+							        	<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="showSessionData">
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												
+												<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!showMulitdatePicker">
+													<table class="table">
+														<tr>
+															<td>Session Name:</td>
+															<td>
+																
+																<input type="text" data-ng-model="floorPlanSessionData.eventSessioName" 
+																 
+																 class="form-control" placeholder="Enter Session Name">
+															</td>
+															<td>Event Date :</td>
+															<td>
+																<input type="text" data-ng-model="floorPlanSessionData.eventSessionDate"
+													 			class="form-control" jqdatepickereventdate 
+													 			readonly="readonly" placeholder="Select Date">
+															</td>
+														</tr>
+														<tr>
+															<td>Start Time </td>
+															<td>
+																<input type="text" data-ng-model="floorPlanSessionData.eventSessionStartTime"
+																 readonly="readonly" 
+																 jqdatepicker55
+																 
+																 class="form-control" placeholder="Enter Session Start Time">
+															</td>
+															<td>End Time</td>
+															<td>
+																<input type="text" data-ng-model="floorPlanSessionData.eventsessionEndTime" 
+																 jqdatepicker55 readonly="readonly"
+																 class="form-control" placeholder="Enter Session End Time">
+															</td>
+															
+														</tr>
+														<tr>
+															<td>Select Templates</td>
+															<td>
+																{{floorPlanSessionData.sessionTemeplates.serviceMapName}}
+															</td>
+															<td>Booking Start From</td>
+															<td>
+															
+																<select data-ng-model="floorPlanSessionData.eventBookingStartTime" class="form-control"
+																	data-ng-include="'templates/view/subTemplates/timeDropDown.html'"
+																>
+																	
+																</select>
+															</td>
+														</tr>	
+														<tr>
+														<td>Description: </td>
+														<td colspan="3">
+															<textarea rows="5" cols="40" style="resize: vertical;"
+															placeholder="Enter Discription" 
+															data-ng-model="floorPlanSessionData.eventSessionDescription" class="form-control">
+															</textarea>
+														</td>
+													</tr>
+													</table>
+													<hr>
+												</div>
+												<div class="col-md-12 col-sm-12 col-xs-12" >
+													 
+													<div class="col-md-3 col-sm-3 col-xs-3">
+														<button class="btn btn-primary" data-ng-click="showMulitdatePicker=true" data-ng-show="!showMulitdatePicker">Make it recursive</button>
+														<button class="btn btn-warning" data-ng-click="showMulitdatePicker=false" data-ng-show="showMulitdatePicker">Cancel</button>
+														
+													</div>
+													
+													<div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="showMulitdatePicker">
+														<h5>Select dates for recursion</h5>
+														<uib-datepicker ng-model='datesForRecurtion' 
+															  multi-select='floorPlanSessionData.selectedDates' 
+															  show-weeks="false"
+															  select-range='true'
+															  ></uib-datepicker>
+														{{floorPlanSessionData.selectedDates}}
+														
+													</div>
+													
+													
+												</div>
+												<br><br>
+												</div>
+												<div class="col-md-12 col-sm-12 col-xs-12">
+													<div class="col-md-6 col-sm-6 col-xs-6" >
+												
+														<label>Templates Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+														<input type="text" data-ng-model="floorPlanDataTemples.serviceMapName"><br>
+														<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type="number" 
+														data-ng-model="floorPlanDataTemples.numOfRow"><br>
+														<label>Enter Num Of Column&nbsp;&nbsp;:</label><input type="number" 
+														data-ng-model="floorPlanDataTemples.numOfCol">
+													</div>
+													<div class="col-md-6 col-sm-6 col-xs-6">
+														<input type="text" class="form-control" placeholder="Add category" 
+														style="width: 200px;" data-ng-model="catergoryValue" >
+														
+														<br>
+														<button class="btn btn-primary" data-ng-click="addCategory()">Add catergories</button>
+													</div>
+													<div class="col-md-6 col-sm-6 col-xs-6">
+														<br>
+														<button class="btn btn-info" data-ng-click="creatView()">Reset view</button>
+														<br><br>
+														<button class="btn btn-success"
+														 data-ng-click="saveFloorPlanSessionData()">Save </button>
+														&nbsp;&nbsp;&nbsp;
+														<button class="btn btn-warning" data-ng-click="tabClick()">Back </button>
+														<br><br>
+														<button class="btn btn-primary" data-ng-click="showCanvas()">show Canavas</button>
+														<button class="btn btn-primary" data-ng-click="showmapViewClick = true" data-ng-show="!showmapViewClick">Show Maps</button>
+														<button class="btn btn-primary" data-ng-click="showmapViewClick = false" data-ng-show="showmapViewClick">Hide Maps</button>
+													</div>	
+													<div class="col-md-6 col-sm-6 col-xs-6">
+														<br>
+														
+														 		
+														 		{{toShow?seatCateory:''}}
+														 		<table class="table">
+														 			<tr data-ng-repeat="seatCateory in 
+														 		floorPlanDataTemples.seatCateories" >
+														 				<td>
+														 					<span  data-ng-show="toShow">{{seatCateory.category.categoryName}}</span>
+														 				
+														 					<input type="text" data-ng-model="seatCateory.category.categoryName" data-ng-show="!toShow">
+														 				</td>
+														 				<td>
+														 					<span data-ng-show="toShow">{{seatCateory.category.categoryPrice}}</span>
+														 					<input type="text" data-ng-model="seatCateory.category.categoryPrice" data-ng-show="!toShow">
+														 				</td>
+														 				<td>
+														 					<div class="pull-right" data-ng-init="toShow=true">
+																	 			<i class="fa fa-edit" title="Edit Category" data-ng-show="toShow"
+																	 			 data-ng-click="toShow=!toShow;"></i>
+																	 			<i class="fa fa-trash" title="Delete Category" 
+																	 			data-ng-show="toShow" data-ng-click="deleteCategory($index);refreshView()"></i>
+																	 			<i class="fa fa-floppy-o" title="Done" data-ng-show="!toShow" 
+																	 			data-ng-click="toShow=!toShow;floorPlanDataTemples.seatCateories[$index]=seatCateory"></i>
+																	 		</div>
+														 				</td>
+														 			</tr>
+															</table>
+													</div>
+												</div>
+												
+												
+																				
+												
+												
+												
+												 
+											<hr>
+											</div>
+											
+											<div class="col-md-12 col-sm-12 col-xs-12"  data-ng-show="showmapViewClick"
+												data-ng-include="'templates/view/subTemplates/displayMapView.html'">
+												
+											</div>
+											
+										</div>
+							     	<div style="clear: both;height: 20px;"></div>
+							      
+							      <div class="modal-footer">
+							      	<button type="button" class="btn btn-success" data-ng-click="saveFloorPlanSessionData()">Save</button>
+							        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="showmapViewClick =false;tabClick('mannageSession');">Close</button>
+							      </div>
+							    </div>
+							
+							  </div>
+							</div> -->
+					
+						</div>
+					  
+					   
+					   <div id = "floorPlanTemples"
+					    
+					    class = "tab-pane fade  in active  col-md-12 col-sm-12 col-xs-12 " >
+						<br>
+							 <div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="col-md-12 col-sm-12 col-xs-12" data-ng-if="$root.isEmpty(floorPlanDataTemples)" data-ng-show="!addTemplatesClick">
+									<h4>Templates</h4>
+									<ul class="list-group" data-ng-repeat="serviceMapTemplat in servicesData.seatPlannerServicesData.formData.serviceMapTemplatList">
+										<li class="list-group-item">
+											<label>{{serviceMapTemplat.serviceMapName}}</label>
+										
+											<button class="btn btn-info btn-sm pull-right" 
+											data-ng-click="getTemplateData(serviceMapTemplat.serviceMaptempletId,serviceMapTemplat.serviceMapName,$index)">Show Template</button>
+											
+										</li>
+									</ul>
+									<button class="btn btn-primary" data-ng-click="addMoreTempates()">Add templates</button>
+								</div>
+								
+								<div class="col-md-12 col-sm-12 col-xs-12" 
+									data-ng-hide="!addTemplatesClick || hideTemplatesCleck">
+									<h4>Add New Templates</h4>
+									<input type="text" class="form-control" 
+										data-ng-model="cuurentTemplateName" style="width: 250px;"
+										placeholder="Enter Templates Name"/>
+										
+									<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+									<input type="number" data-ng-model="numOfRow"><br>
+									<label>Enter Num Of Column&nbsp;&nbsp;:</label>
+									<input type="number" data-ng-model="numOfCol">
+									<br>
+									<button class="btn btn-success" data-ng-click="intializeDataForView()">Create View</button>
+									&nbsp;&nbsp;&nbsp;
+									<button class="btn btn-warning" data-ng-click="backTolistDataData()">Back </button>
+								</div>
+								<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!$root.isEmpty(floorPlanDataTemples)">
+									<!-- <a ng-href="#/seatPlanReport/{{floorPlanDataTemples.idString}}" class="btn btn-warning btn-sm pull-right">Report</a> -->
+									
+									<div class="col-md-12 col-sm-12 col-xs-12">
+										
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<label>Templates Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+											<input type="text" data-ng-model="cuurentTemplateName"><br>
+											<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type="number" 
+											data-ng-model="floorPlanDataTemples.numOfRow"><br>
+											<label>Enter Num Of Column&nbsp;&nbsp;:</label><input type="number" 
+											data-ng-model="floorPlanDataTemples.numOfCol">
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+										<input type="text" class="form-control" placeholder="Add category" 
+										style="width: 200px;" data-ng-model="catergoryValue" >
+										
+										<br>
+										<button class="btn btn-primary" data-ng-click="addCategory()">Add catergories</button>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<br>
+											<button class="btn btn-info" data-ng-click="creatView()">Reset view</button>
+											<br><br>
+											<button class="btn btn-success" data-ng-click="saveFloorPlanMapData()">Save </button>
+											&nbsp;&nbsp;&nbsp;
+											<button class="btn btn-warning" data-ng-click="backTolistDataData()">Back </button>
+											<!-- <br><br>
+											<button class="btn btn-primary" data-ng-click="showCanvas()">show Canavas</button> -->
+										</div>									
+										<div class="col-md-6 col-sm-6 col-xs-6">
+											<br>
+											
+											<ul class="list-group">
+											 	<li class="list-group-item" 
+											 		data-ng-repeat="seatCateory in 
+											 		floorPlanDataTemples.seatCateories" style="height: auto;">
+											 		<!-- {{toShow?seatCateory:''}} -->
+											 		{{seatCateory.category.categoryName}}
+											 		
+											 		<input type="text" data-ng-model="seatCateory.category.categoryName" data-ng-show="!toShow">
+											 		<div class="pull-right" data-ng-init="toShow=true">
+											 			<i class="fa fa-edit" title="Edit Category" data-ng-show="toShow"
+											 			 data-ng-click="toShow=!toShow;"></i>
+											 			<i class="fa fa-trash" title="Delete Category" 
+											 			data-ng-show="toShow" data-ng-click="deleteCategory($index);refreshView()"></i>
+											 			<i class="fa fa-floppy-o" title="Done" data-ng-show="!toShow" 
+											 			data-ng-click="toShow=!toShow;floorPlanDataTemples.seatCateories[$index]=seatCateory.category.categoryName;"></i>
+											 		</div>
+											 </li>
+											 </ul> 
+										</div>
+										
+										
+										 
+										
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12" id="canvasContainer" style="display: none;position: absolute;z-index: 100">
+										<canvas id="canvas2" width="{{canvasWidth}}" height="{{canvasHeight}}" style="border: 0px solid;">
+									    	This text is displayed if your browser does not support HTML5 Canvas.
+									    </canvas>
+									    <button class="btn btn-denger" data-ng-click="deleteBox()">Delete selected</button>
+									</div>
+									<div class="col-md-12 col-sm-12 col-xs-12"  
+										data-ng-include="'templates/view/subTemplates/displayMapView.html'">
+										
+									</div>
+								</div>
+							
+							
+							</div>     
+					   </div>
+					</div>
+					<!-- {{servicesData.discritiveData.formData}} -->
+					
+				</div>
+			</div>
+			</div>
+			</div>
+		</div>
+		
+</div>
+

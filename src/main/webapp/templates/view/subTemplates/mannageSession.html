@@ -1,0 +1,315 @@
+<br>
+<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!showSessionAddnew">
+	
+			
+	<table class="table">
+		<tr data-ng-repeat="serviceMapSessions in servicesData.seatPlannerServicesData.formData.serviceMapSessionsList">
+			<td><label>{{serviceMapSessions.sessionName}}</label></td>
+			<td>
+			
+			<table class="table">
+				<tr>
+					
+					<td>{{serviceMapSessions.floorPlanSessionData.eventSessionDate}}</td>
+					<td>{{serviceMapSessions.floorPlanSessionData.eventSessionStartTime}}</td>
+					<td>{{serviceMapSessions.floorPlanSessionData.eventsessionEndTime}}</td>
+					<td>Before {{serviceMapSessions.floorPlanSessionData.eventBookingStartTime}} hr</td>
+					<td>
+						<a data-ng-href="#/seatPlanReport/{{serviceId}}/{{serviceMapSessions.floorPlanSessionData.stringId}}">
+						Report
+						</a>
+					</td>
+				</tr>
+				<tr data-ng-repeat="floorPlanSessionData in serviceMapSessions.floorPlanRecurciveSessionData">
+					
+					<td>{{floorPlanSessionData.eventSessionDate}}</td>
+					<td>{{floorPlanSessionData.eventSessionStartTime}}</td>
+					<td>{{floorPlanSessionData.eventsessionEndTime}}</td>
+					<td>Before {{floorPlanSessionData.eventBookingStartTime}} hr</td>
+					<td>
+						<a data-ng-href="#/seatPlanReport/{{serviceId}}/{{floorPlanSessionData.stringId}}">
+							Report
+						</a>
+					</td>
+				</tr>
+				</table>
+			<td>
+				<button class="btn btn-info btn-sm pull-right" 
+				data-ng-click="getFloorPlanSessionDetailsWithNewImplemntation(serviceMapSessions,$index)">Get Session details</button>
+			</td>
+		</tr>
+	</table>
+	
+	<button class="btn btn-primary" data-ng-click="addNewSession()">
+		Add New Session
+	</button>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="showSessionAddnew">
+	
+	<div class="col-md-12 col-sm-12 col-xs-12">
+	<table class="table">
+		<tr>
+			<td>Session Name:</td>
+			<td>
+				<input type="text" data-ng-model="session.eventSessioName"
+	 			class="form-control" placeholder="Enter Session Name">
+			</td>
+			<td>Event Date :</td>
+			<td>
+				<input type="text" data-ng-model="session.eventSessionDate"
+	 			class="form-control" jqdatepickereventdate 
+	 			readonly="readonly" placeholder="Select Date">
+			</td>
+		</tr>
+		<tr>
+			<td>Start Time </td>
+			<td>
+				<input type="text" data-ng-model="session.eventSessionStartTime"
+				 readonly="readonly" 
+				 jqdatepicker55
+				 
+				 class="form-control" placeholder="Select Session Start Time">
+			</td>
+			<td>End Time</td>
+			<td>
+				<input type="text" data-ng-model="session.eventsessionEndTime" 
+				 jqdatepicker55 readonly="readonly"
+				 class="form-control" placeholder="Select Session End Time">
+			</td>
+			
+		</tr>
+		<tr>
+			<td>Select Templates</td>
+			<td>
+				<select data-ng-model="session.sessionTemeplates" class="form-control">
+					<option value="" selected="selected">--select--</option>
+					<option data-ng-repeat="serviceMapTemplate in servicesData.seatPlannerServicesData.formData.serviceMapTemplatList"
+					value="{{serviceMapTemplate}}">
+						{{serviceMapTemplate.serviceMapName}}
+					</option>
+				</select>
+			</td>
+			<td>Booking Start From</td>
+			<td>
+			<select data-ng-model="session.eventBookingStartTime" class="form-control"
+					data-ng-include="'templates/view/subTemplates/timeDropDown2.html'" >
+			</select>
+				
+			</td>
+		</tr>
+		<tr>
+			<td>Description: </td>
+			<td colspan="3">
+				<textarea rows="5" cols="40" style="resize: vertical;"
+				placeholder="Enter Discription" 
+				data-ng-model="session.eventSessionDescription" class="form-control">
+				</textarea>
+			</td>
+		</tr>
+		<tr>
+		
+			<td colspan="4">
+				<button class="btn btn-success" data-ng-click="addNewSessionDataToDb()">
+					Add Session
+				</button>
+				&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-warning" data-ng-click="backToSessionlistDataData()">Back </button>
+				<!-- {{session}} -->
+			</td>
+		
+		</tr>
+	</table>
+	</div>
+ </div>
+
+
+
+
+<div id="sessionMoreDetailsModal" class="modal fade" role="dialog" style="z-index: 10000;">
+  <div class="modal-dialog modal-lg" style="width: 90%;">
+
+    <!-- Modal content-->
+    <div class="modal-content" style="width: 100%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+         data-ng-click="showmapViewClick =false;showMulitdatePicker = flase;tabClick('mannageSession');">&times;</button>
+        <h4 class="modal-title">{{floorPlanSessionData.eventSessioName}}
+        	
+        </h4>
+      </div>
+      <div class="modal-body" id="">
+      	<div style="clear: both;height: 20px;"></div>
+        	<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="showSessionData">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					
+					<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!showMulitdatePicker">
+						<table class="table">
+							<tr>
+								<td>Session Name:</td>
+								<td>
+									
+									<input type="text" data-ng-model="floorPlanSessionData.eventSessioName" 
+									 
+									 class="form-control" placeholder="Enter Session Name">
+								</td>
+								<td>Event Date :</td>
+								<td>
+									<input type="text" data-ng-model="floorPlanSessionData.eventSessionDate"
+						 			class="form-control" jqdatepickereventdate 
+						 			readonly="readonly" placeholder="Select Date">
+								</td>
+							</tr>
+							<tr>
+								<td>Start Time </td>
+								<td>
+									<input type="text" data-ng-model="floorPlanSessionData.eventSessionStartTime"
+									 readonly="readonly" 
+									 jqdatepicker55
+									 
+									 class="form-control" placeholder="Enter Session Start Time">
+								</td>
+								<td>End Time</td>
+								<td>
+									<input type="text" data-ng-model="floorPlanSessionData.eventsessionEndTime" 
+									 jqdatepicker55 readonly="readonly"
+									 class="form-control" placeholder="Enter Session End Time">
+								</td>
+								
+							</tr>
+							<tr>
+								<td>Select Templates</td>
+								<td>
+									{{floorPlanSessionData.sessionTemeplates.serviceMapName}}
+								</td>
+								<td>Booking Start From</td>
+								<td>
+								
+									<select data-ng-model="floorPlanSessionData.eventBookingStartTime" class="form-control"
+										data-ng-include="'templates/view/subTemplates/timeDropDown.html'"
+									>
+										
+									</select>
+								</td>
+							</tr>	
+							<tr>
+							<td>Description: </td>
+							<td colspan="3">
+								<textarea rows="5" cols="40" style="resize: vertical;"
+								placeholder="Enter Discription" 
+								data-ng-model="floorPlanSessionData.eventSessionDescription" class="form-control">
+								</textarea>
+							</td>
+						</tr>
+						</table>
+						<hr>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12" >
+						 
+						<div class="col-md-3 col-sm-3 col-xs-3">
+							<button class="btn btn-primary" data-ng-click="showMulitdatePicker=true" data-ng-show="!showMulitdatePicker">Make it recursive</button>
+							<button class="btn btn-warning" data-ng-click="showMulitdatePicker=false" data-ng-show="showMulitdatePicker">Cancel</button>
+							
+						</div>
+						
+						<div class="col-md-9 col-sm-9 col-xs-9" data-ng-show="showMulitdatePicker">
+							<h5>Select dates for recursion</h5>
+							<uib-datepicker ng-model='datesForRecurtion' 
+								  multi-select='floorPlanSessionData.selectedDates' 
+								  show-weeks="false"
+								  min-date="mindatecurrent"
+								  ></uib-datepicker>
+							{{floorPlanSessionData.selectedDates}}
+							
+						</div>
+						
+						
+					</div>
+					<br><br>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="col-md-6 col-sm-6 col-xs-6" >
+					
+							<label>Templates Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+							<input type="text" data-ng-model="floorPlanDataTemples.serviceMapName"><br>
+							<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type="number" 
+							data-ng-model="floorPlanDataTemples.numOfRow"><br>
+							<label>Enter Num Of Column&nbsp;&nbsp;:</label><input type="number" 
+							data-ng-model="floorPlanDataTemples.numOfCol">
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<input type="text" class="form-control" placeholder="Add category" 
+							style="width: 200px;" data-ng-model="catergoryValue" >
+							
+							<br>
+							<button class="btn btn-primary" data-ng-click="addCategory()">Add catergories</button>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<br>
+							<button class="btn btn-info" data-ng-click="creatView()">Reset view</button>
+							<br><br>
+							<button class="btn btn-success"
+							 data-ng-click="saveFloorPlanSessionData()">Save </button>
+							&nbsp;&nbsp;&nbsp;
+							<!-- <button class="btn btn-warning" data-ng-click="tabClick()">Back </button> -->
+							<!-- <br><br>
+							<button class="btn btn-primary" data-ng-click="showCanvas()">show Canavas</button> -->
+							<button class="btn btn-primary" data-ng-click="showmapViewClick = true" data-ng-show="!showmapViewClick">Show Maps</button>
+							<button class="btn btn-primary" data-ng-click="showmapViewClick = false" data-ng-show="showmapViewClick">Hide Maps</button>
+						</div>	
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<br>
+							
+							 		
+							 		<!-- {{toShow?seatCateory:''}} -->
+							 		<table class="table">
+							 			<tr data-ng-repeat="seatCateory in 
+							 		floorPlanDataTemples.seatCateories" >
+							 				<td>
+							 					<span  data-ng-show="toShow">{{seatCateory.category.categoryName}}</span>
+							 				
+							 					<input type="text" data-ng-model="seatCateory.category.categoryName" data-ng-show="!toShow">
+							 				</td>
+							 				<td>
+							 					<span data-ng-show="toShow">{{seatCateory.category.categoryPrice}}</span>
+							 					<input type="text" data-ng-model="seatCateory.category.categoryPrice" data-ng-show="!toShow">
+							 				</td>
+							 				<td>
+							 					<div class="pull-right" data-ng-init="toShow=true">
+										 			<i class="fa fa-edit" title="Edit Category" data-ng-show="toShow"
+										 			 data-ng-click="toShow=!toShow;"></i>
+										 			<i class="fa fa-trash" title="Delete Category" 
+										 			data-ng-show="toShow" data-ng-click="deleteCategory($index);refreshView()"></i>
+										 			<i class="fa fa-floppy-o" title="Done" data-ng-show="!toShow" 
+										 			data-ng-click="toShow=!toShow;floorPlanDataTemples.seatCateories[$index]=seatCateory"></i>
+										 		</div>
+							 				</td>
+							 			</tr>
+								</table>
+						</div>
+					</div>
+					
+					
+													
+					
+					
+					
+					 
+				<hr>
+				</div>
+				
+				<div class="col-md-12 col-sm-12 col-xs-12"  data-ng-show="showmapViewClick"
+					data-ng-include="'templates/view/subTemplates/displayMapView.html'">
+					
+				</div>
+				
+			</div>
+     	<div style="clear: both;height: 20px;"></div>
+      
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-success" data-ng-click="saveFloorPlanSessionData()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="showmapViewClick =false;tabClick('mannageSession');">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

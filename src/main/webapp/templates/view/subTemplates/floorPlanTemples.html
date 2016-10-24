@@ -1,0 +1,104 @@
+<br>
+ <div class="col-md-12 col-sm-12 col-xs-12" ng-init="$scope=$parent">
+	<div class="col-md-12 col-sm-12 col-xs-12" data-ng-if="$root.isEmpty(floorPlanDataTemples)" data-ng-show="!addTemplatesClick">
+		<h4>Templates</h4>
+		<ul class="list-group" data-ng-repeat="serviceMapTemplat in servicesData.seatPlannerServicesData.formData.serviceMapTemplatList">
+			<li class="list-group-item">
+				<label>{{serviceMapTemplat.serviceMapName}}</label>
+			
+				<button class="btn btn-info btn-sm pull-right" 
+				data-ng-click="getTemplateData(serviceMapTemplat.serviceMaptempletId,serviceMapTemplat.serviceMapName,$index)">Show Template</button>
+				
+			</li>
+		</ul>
+		<button class="btn btn-primary" data-ng-click="addMoreTempates()">Add templates</button>
+	</div>
+	
+	<div class="col-md-12 col-sm-12 col-xs-12" 
+		data-ng-hide="!addTemplatesClick || hideTemplatesCleck">
+		 {{cuurentTemplateName}}
+		<h4>Add New Templates</h4>
+		<input type="text" class="form-control" 
+			data-ng-model="cuurentTemplateName" style="width: 250px;"
+			placeholder="Enter Templates Name"/>
+			
+		<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+		<input type="number" data-ng-model="numOfRow"><br>
+		<label>Enter Num Of Column&nbsp;&nbsp;:</label>
+		<input type="number" data-ng-model="numOfCol">
+		<br>
+		<button class="btn btn-success" data-ng-click="intializeDataForView()">Create View</button>
+		&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-warning" data-ng-click="backTolistDataData()">Back </button>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12" data-ng-show="!$root.isEmpty(floorPlanDataTemples)">
+		<!-- <a ng-href="#/seatPlanReport/{{floorPlanDataTemples.idString}}" class="btn btn-warning btn-sm pull-right">Report</a> -->
+		
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<label>Templates Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
+				<input type="text" data-ng-model="cuurentTemplateName"><br>
+				<label>Enter Num Of Row&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label><input type="number" 
+				data-ng-model="floorPlanDataTemples.numOfRow"><br>
+				<label>Enter Num Of Column&nbsp;&nbsp;:</label><input type="number" 
+				data-ng-model="floorPlanDataTemples.numOfCol">
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+			<input type="text" class="form-control" placeholder="Add category" 
+			style="width: 200px;" data-ng-model="catergoryValue" >
+			
+			<br>
+			<button class="btn btn-primary" data-ng-click="addCategory()">Add catergories</button>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<br>
+				<button class="btn btn-info" data-ng-click="creatView()">Reset view</button>
+				<br><br>
+				<button class="btn btn-success" data-ng-click="saveFloorPlanMapData()">Save </button>
+				&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-warning" data-ng-click="backTolistDataData()">Back </button>
+				<!-- <br><br>
+				<button class="btn btn-primary" data-ng-click="showCanvas()">show Canavas</button> -->
+			</div>									
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<br>
+				
+				<ul class="list-group">
+				 	<li class="list-group-item" 
+				 		data-ng-repeat="seatCateory in 
+				 		floorPlanDataTemples.seatCateories" style="height: auto;">
+				 		<!-- {{toShow?seatCateory:''}} -->
+				 		{{seatCateory.category.categoryName}}
+				 		
+				 		<input type="text" data-ng-model="seatCateory.category.categoryName" data-ng-show="!toShow">
+				 		<div class="pull-right" data-ng-init="toShow=true">
+				 			<i class="fa fa-edit" title="Edit Category" data-ng-show="toShow"
+				 			 data-ng-click="toShow=!toShow;"></i>
+				 			<i class="fa fa-trash" title="Delete Category" 
+				 			data-ng-show="toShow" data-ng-click="deleteCategory($index);refreshView()"></i>
+				 			<i class="fa fa-floppy-o" title="Done" data-ng-show="!toShow" 
+				 			data-ng-click="toShow=!toShow;floorPlanDataTemples.seatCateories[$index]=seatCateory.category.categoryName;"></i>
+				 		</div>
+				 </li>
+				 </ul> 
+			</div>
+			
+			
+			 
+			
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12" id="canvasContainer" style="display: none;position: absolute;z-index: 100">
+			<canvas id="canvas2" width="{{canvasWidth}}" height="{{canvasHeight}}" style="border: 0px solid;">
+		    	This text is displayed if your browser does not support HTML5 Canvas.
+		    </canvas>
+		    <button class="btn btn-denger" data-ng-click="deleteBox()">Delete selected</button>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12"  
+			data-ng-include="'templates/view/subTemplates/displayMapView.html'">
+			
+		</div>
+	</div>
+
+
+</div> 

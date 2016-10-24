@@ -1,0 +1,93 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+	<table class="table table-bordered" id="layoutcontainerTable" style="width: auto;">
+		<tr>
+			<th></th>
+			<th data-ng-repeat="seatcol in floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns" 
+			
+			align="center" style="height: 20px;width: 40px;">
+				
+				 <i class="fa fa-plus" title="Add"
+				data-ng-if="($index != 0 && $index != floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+				data-ng-click="addExtraRowAfterFirstRow()"
+				></i>
+				<i class="fa fa-bookmark" title="Remove Column" 
+					data-ng-if="($index !=0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+					data-ng-click="removeColumn($index,seatcol,true)"
+					data-ng-hide="seatcol.columnRemoved"
+				></i>
+				<i class="fa fa-bookmark greayclor" title="Add Column"
+				  data-ng-click="removeColumn($index,seatcol,false)"
+				  data-ng-Show="seatcol.columnRemoved &&($index != 0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+				></i>
+			</th>
+		</tr>
+		<tr data-ng-repeat="seatRow in floorPlanDataTemples.seaTPlanData.seatRows">
+			
+			<td>
+				<select style="width: 80px;" class="form-control" 
+				data-ng-init="seatCateoryselect = seatRow.seatColumns[1].columnSeatCateory" 
+				 data-ng-model="seatCateoryselect"
+				 data-ng-change="categoryChange(seatRow,seatCateoryselect)" title="{{seatCateoryselect}}">
+					<option value="" selected="selected">--select--</option>
+					<option value="{{seatCateory2.category.categoryName}}" data-ng-repeat="seatCateory2 in floorPlanDataTemples.seatCateories">
+					{{seatCateory2.category.categoryName}}
+					</option>
+				</select>
+			</td>
+			<td data-ng-repeat="seatcol in seatRow.seatColumns" align="center" 
+				data-ng-mouseover="seatcol.showAddButton = true" 
+				style="height: 20px;width: 60px;"
+				
+				data-ng-mouseleave="seatcol.showAddButton =!seatcol.showAddButton" data-ng-init="seatcol.showAddButton = !true">
+				<!-- {{seatcol.showAddButton}} -->
+				<span data-ng-hide="seatcol.columnShow || $index == seatRow.seatColumns.length-1">
+					{{seatcol.columnStatusLable}}
+				</span>
+				<i class="fa fa-times" data-ng-hide="seatcol.columnRemoved"
+				 title="Remove seat" style="font-size: 10px;"
+				 data-ng-click="removeCell(seatcol,true)"></i>
+				<i class="fa fa-plus" title="Add seat" 
+				  data-ng-click="removeCell(seatcol,false)" data-ng-show="seatcol.columnRemoved  && seatcol.columnShow && seatcol.showAddButton"
+				  style="font-size: 12px;"></i>
+				  <!-- {{seatcol.columnShow}}
+				    {{seatcol.columnRemoved}} -->
+				<i class="fa fa-square" data-ng-hide="seatcol.columnRemoved"></i>
+				<i class="fa fa-plus" title="Add Seat" data-ng-hide="seatcol.columnShow" 
+				data-ng-click="addExtraCell(seatRow,{{$index}})"></i>
+				<i class="fa fa-bookmark" style="color: black;" data-ng-class="{blackColor:!flagtosend,greayclor:flagtosend}" 
+				title="{{!flagtosend?'Remove Row':'Add Row'}}" data-ng-hide="seatcol.columnShow  || $index == 0" 
+				data-ng-init="flagtosend = false"
+				 data-ng-click="removeRow(seatRow.seatColumns,!flagtosend);flagtosend =!flagtosend"></i>
+
+				<i class="fa fa-trash" title="Delete Row" data-ng-hide="seatcol.columnShow" data-ng-click="deleteRow(seatRow)"></i>
+
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<th data-ng-repeat="seatcol in floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns" 
+			style="height: 20px;width: 40px;" align="center">
+				<i class="fa fa-plus" title="Add"
+				data-ng-if="($index != 0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+				data-ng-click="addExtraRow()"
+				></i>
+				
+				<i class="fa fa-bookmark" title="Remove Column" 
+					data-ng-if="($index !=0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+					data-ng-click="removeColumn($index,seatcol,true)"
+					data-ng-hide="seatcol.columnRemoved"
+				></i>
+				
+				<i class="fa fa-bookmark greayclor" title="Add Column"
+				  data-ng-click="removeColumn($index,seatcol,false)"
+				  data-ng-Show="seatcol.columnRemoved &&($index != 0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+				></i>
+				<i class="fa fa-trash" title="delete all Column" 
+				data-ng-if="($index != 0 && $index !=floorPlanDataTemples.seaTPlanDataFirstRow.seatRows[0].seatColumns.length-1)"
+				data-ng-click="delteAllColumn($index,seatcol,true)"
+				></i>
+				
+			</th>
+		</tr>
+	</table>
+</div>

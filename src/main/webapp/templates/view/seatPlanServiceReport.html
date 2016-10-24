@@ -1,0 +1,55 @@
+<div class="container-fluid">
+		<div class="row list-group" id="wrapper">
+			<div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div>
+			<div class="col-md-10 col-sm-10 col-xs-10" id="page-content-wrapper">
+				
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				</div>
+				
+				<!-- contentWill go here -->
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+							<input type="text" data-ng-model="floorPlanDataDate" placeholder="dd/mm/yyy"
+						 class="form-control" style="width: 200px;" jqdatepicker1 readonly="readonly" data-ng-change="getSeatPlanRepotData()">
+						 <br>
+						 
+					</div>
+					<div class="col-md-8 col-sm-8 col-xs-8">
+					
+						<h4 ng-show="seaTPlanDataList.length == 0 ">No Data Found for the day</h4>
+						<table class="table table-bordered" style="width: auto;">
+							<tr data-ng-repeat="seatRow in seaTPlanDataList.seatRows" style="height: 20px;width: 40px;">
+								<td>
+									
+									{{seatRow.seatColumns[1].columnStatusLable}}
+								</td>
+								<td data-ng-repeat="seatcol in seatRow.seatColumns" align="center" 
+									title="{{seatcol.userprofile.userMaster.userFname}} {{seatcol.userprofile.userMaster.userLName}}"
+								style="height: 20px;width: 40px;" data-ng-hide="$index==0">
+									
+										
+									<!-- <span data-ng-hide="seatcol.columnShow">
+										{{seatcol.columnStatusLable}}
+									</span> -->
+									
+									
+									<i class="fa fa-square" data-ng-hide="seatcol.columnRemoved" data-ng-class="{seatbooked:seatcol.columnStatus==2}"></i>
+									
+								</td>
+							</tr>
+						
+						</table>
+					</div>	
+					
+				</div>
+				
+				
+			</div>
+		</div>
+</div>

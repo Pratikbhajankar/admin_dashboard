@@ -1,0 +1,26 @@
+<div id="sidebar-wrapper" style="margin-top: 0px;z-index: 9999;">
+		           
+	<ul class="nav nav-stacked navigationTabClass">
+	  	<li class="nav-header">
+	   		<a href="#/serviceDashBoard" class="linkClickClass" data-ng-hide="$root.isServicesShow">Services</a>
+	   		<a href="javascript:void(0)" class="linkClickClass" ng-click ="clicked($event)"  data-toggle="collapse"  data-target="#sercicesListUl" class="active" data-ng-show="$root.isServicesShow">Services</a>
+	    </li>
+	  	<li class="nav-header" >
+	        <ul class="nav nav-stacked collapse in list-unstyled" id="sercicesListUl" class="">
+	        	<li data-ng-repeat="service in servicesData" data-ng-class="{'active':service.idString==serviceId}">
+	        		<a data-ng-href="#/servicesSettingDashBoard/{{service.idString}}/{{service.serviceType}}">{{service.servieDisplayName}}</a>
+	        	</li>
+	        </ul> 
+	    </li>
+	    
+	    <li class="nav-header">
+	    	 <a href="#/serviceList">Add / Edit Services</a>
+	    </li>
+	    <li class="nav-header">
+	    	 <a href="javascript:void(0)">OtherTask</a>
+	    </li>
+	     <li class="nav-header">
+	    	 <a href="javascript:void(0)">OtherTask</a>
+	     </li>
+	</ul>
+</div>

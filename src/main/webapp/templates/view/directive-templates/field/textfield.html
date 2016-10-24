@@ -1,0 +1,11 @@
+<div class="field row">
+    <div class="span2">{{field.fieldtitle}}:</div>
+    <div class="span4">
+		<input type="text" 
+			ng-model="field.fieldvalue" 
+			placeholder="{{field.fieldvalue}}" 
+			ng-required="field.fieldrequired"
+			ng-disabled="field.fielddisabled">
+        <span class="required-error" ng-show="field.fieldrequired && !field.fieldvalue">* required</span>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+<div class="container-fluid">
+		<div class="row list-group">
+			<!-- <div class="col-md-2 col-sm-2 col-xs-2" data-ng-include="'templates/view/sideBarPage.html'">
+				
+			</div> -->
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				
+				<!-- <div class="col-md-12 col-sm-12 col-xs-12">
+					 <div class="col-md-12 col-sm-12 col-xs-12">
+					 	<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" data-ng-click="$root.menu_toggle($event)">Toggle Menu</a>
+					 </div>
+				 	
+				</div> -->
+				
+				<!-- contentWill go here -->
+				<div class="col-md-12 col-sm-12 col-xs-12 Content-containerClass">
+										<div class="col-md-4 col-sm-12 col-xs-12 pull-right">
+						<div class="pull-left">
+							<img alt="" data-ng-src="./rest/v1/user/file/getImage?fileId={{jobsDetail.userProfile.userProfileImageId}}" title="{{jobsDetail.userProfile.userMaster.userFname}}" class="img-circle" style="width: 100px;height: 95px;">
+						</div>
+						<div class="pull-left col-md-12 col-sm-12 col-xs-12">
+							<h3>{{jobsDetail.userProfile.userMaster.userFname}} {{jobsDetail.userProfile.userMaster.userLName}}</h3>
+							<h4>{{jobsDetail.userProfile.userMaster.emailId}}</h4>
+							<h4>{{jobsDetail.userProfile.address}}</h4>
+							<!-- <h4>{{jobsDetail.userProfile.orgName}}</h4> -->
+							<hr>
+						</div>
+						<div class="pull-left col-md-12 col-sm-12 col-xs-12">
+							<a href="#/applyJobApplication/{{jobid}}"
+								data-ng-disabled="isJobApplied"
+							 class="btn btn-success" data-ng-hide="jobsDetail.userId == $root.userinfo.user_id">
+								{{appliedButtonText}}
+							</a>
+						</div>
+					</div>
+					<div class="col-md-7 col-sm-12 col-xs-12">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<hr>
+								<h2>{{jobsDetail.jobTitle}}</h2>	
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<hr>
+							<h3>Description: </h3>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<hr>
+									{{jobsDetail.jobDescription}}
+								<hr>
+							</div>
+							
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12">
+						<h3>Pricing : </h3>
+						<hr>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<label>Max Price : </label> {{jobsDetail.jobMaxprivce}} 
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+								<label>Min Price : </label> {{jobsDetail.jobMinprivce}} 
+							</div>
+							
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<hr>
+					<h3>Job Location :</h3>					
+					<div id="locatinSharingmap" class="col-md-10 col-sm-12 col-xs-12"></div>
+				</div>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<hr>
+					<h3>Proposal :</h3>					
+					<div class="col-md-10 col-sm-12 col-xs-12">
+						<table class="table">
+							
+							<thead>
+								<tr>
+									<th>Name </th>
+									<th>Date</th>
+									<th>Initiated by</th>
+								</tr>
+							</thead>
+
+							 <tbody>
+							 	<tr	 data-ng-repeat="jobApplication in jobsDetail.jobApplications">
+									<td>
+										{{jobApplication.appliedUserInfo.userMaster.userFname}} 
+										{{jobApplication.appliedUserInfo.userMaster.userLName}}
+									</td>
+									<td>
+										{{jobApplication.createdTimeText}}	
+									</td>
+									<td>
+										{{jobApplication.appliedUserInfo.speciality}}
+									</td>
+								</tr>
+							 </tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>

@@ -1,0 +1,10 @@
+<div class="field row">
+    <div class="span2">{{field.fieldtitle}}:</div>
+    <span class="required-error" ng-show="field.fieldrequired && !field.fieldvalue">* required </span>
+    <div class="span4">
+        <div class="control-group input-append">
+            <input type="text" ng-model="field.fieldvalue" data-date-format="mm/dd/yyyy" jqdatepicker  ng-required="field.fieldrequired" ng-disabled="field.fielddisabled">
+           <!--  <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.my-header-btn{
+	margin-bottom:10px;
+	margin-left : 10px;
+	margin-right:10px;
+	margin-top:1%;
+	float: right;
+}
+
+#head{
+	margin:0;
+	height:20%;
+	background-color: maroon;
+}
