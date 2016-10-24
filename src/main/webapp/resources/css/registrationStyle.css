@@ -1,0 +1,16 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.regstrationClass tr{
+	line-height: 40px;
+}
+.regstrationClass td:nth-child(2){
+	width: 60%;
+}
+.regstrationClass td:nth-child(2)>input,.regstrationClass td:nth-child(2)>select{
+	width: 60%;
+}
